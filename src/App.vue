@@ -1,8 +1,13 @@
 <template>
   <div>Project in work.</div>
+  <MyIconButton></MyIconButton>
 </template>
 
 <script>
+import MyIconButton from "@/components/UI/MyIconButton";
+export default {
+  components: {MyIconButton}
+}
 </script>
 
 <style>
