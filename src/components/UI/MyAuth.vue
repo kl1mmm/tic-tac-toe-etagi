@@ -1,16 +1,16 @@
 <template>
   <div class="screen">
-  <div class="block">
-    <img alt="Авторизация" class="dog" src="@/components/UI/pics/AuthDog.svg">
-    <div class="text">
-      Войдите в игру
+    <div class="block">
+      <img alt="Авторизация" class="dog" src="@/components/UI/pics/AuthDog.svg">
+      <div class="text">
+        Войдите в игру
+      </div>
+      <div class="login">
+        <InputText class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"></InputText>
+        <InputText class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"></InputText>
+      </div>
+      <MyButton class="logBtn">Войти</MyButton>
     </div>
-    <div class="login">
-      <InputText class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"></InputText>
-      <InputText class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"></InputText>
-    </div>
-    <MyButton class="logBtn">Войти</MyButton>
-  </div>
   </div>
 </template>
 
@@ -25,16 +25,13 @@ export default {
 </script>
 
 <style scoped>
-.screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .block {
+  margin: auto auto;
   width: 25em;
   height: 29em;
   box-shadow: 0 0.25em 1.25em rgba(44, 57, 121, 0.09);
   border-radius: 16px;
+  background: #FFFFFF;
 }
 
 .dog {

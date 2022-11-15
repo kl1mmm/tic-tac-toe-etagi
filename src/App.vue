@@ -1,9 +1,13 @@
 <template>
-  <div style="font-size: 64px; font-weight: bolder;">Project in work.</div>
+  <AuthPage></AuthPage>
 </template>
 
 <script>
+import AuthPage from "@/components/Pages/AuthPage";
 
+export default {
+  components: {AuthPage}
+}
 </script>
 
 <style>
