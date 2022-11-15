@@ -1,14 +1,9 @@
 <template>
   <div style="font-size: 64px; font-weight: bolder;">Project in work.</div>
-  <MyAuth></MyAuth>
 </template>
 
 <script>
-import MyAuth from "@/components/UI/MyAuth";
 
-export default {
-  components: {MyAuth}
-}
 </script>
 
 <style>
