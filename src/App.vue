@@ -1,13 +1,9 @@
 <template>
-  <AuthPage></AuthPage>
+  <router-view></router-view>
 </template>
 
 <script>
-import AuthPage from "@/components/Pages/AuthPage";
 
-export default {
-  components: {AuthPage}
-}
 </script>
 
 <style>
