@@ -17,14 +17,14 @@
       </a>
     </div>
     <div class="h-center">
-      <a href="#" class="link">Игровое поле</a>
-      <a href="#" class="link">Рейтинг</a>
-      <a href="#" class="link">Активные игроки</a>
-      <a href="#" class="link">История игр</a>
-      <a href="#" class="link">Список игроков</a>
+      <a @click="$router.push('/game/')" href="#" class="link">Игровое поле</a>
+      <a @click="$router.push('/rating/')" href="#" class="link">Рейтинг</a>
+      <a @click="$router.push('/sessions/')" href="#" class="link">Активные игроки</a>
+      <a @click="$router.push('/history/')" href="#" class="link">История игр</a>
+      <a @click="$router.push('/playerslist/')" href="#" class="link">Список игроков</a>
     </div>
     <div class="h-right">
-      <MyIconButton class="ExitBtn"></MyIconButton>
+      <MyIconButton @click="$router.push('/Auth/')" class="ExitBtn"></MyIconButton>
     </div>
   </header>
 </template>
@@ -42,12 +42,13 @@ export default {
 .navbar {
   display: flex;
   justify-content: space-between;
-  height: 64px;
+  height: 4em;
   box-shadow: 0 0.125em 0.375em rgba(44, 57, 121, 0.1);
   border-radius: 0 0 1em 1em;
   font-weight: 500;
   font-size: 1em;
   line-height: 4.05em;
+  background: #FFFFFF;
 }
 
 .link {

@@ -6,10 +6,13 @@
         Войдите в игру
       </div>
       <div class="login">
-        <InputText class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"></InputText>
-        <InputText class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"></InputText>
+        <InputText id="login" class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;" v-bind:value="login"
+                   @input="login = $event.target.value"></InputText>
+        <InputText id="passwd" class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"
+                   v-bind:value="password"
+                   @input="password = $event.target.value"></InputText>
       </div>
-      <MyButton class="logBtn">Войти</MyButton>
+      <MyButton class="logBtn" @click="isLogin">Войти</MyButton>
     </div>
   </div>
 </template>
@@ -17,10 +20,27 @@
 <script>
 import InputText from "@/components/UI/InputText";
 import MyButton from "@/components/UI/MyButton";
+import router from "@/components/Router/router";
 
 export default {
   name: "MyAuth",
-  components: {MyButton, InputText}
+  components: {MyButton, InputText},
+  data() {
+    return {
+      login: '',
+      password: ''
+    }
+  },
+  methods: {
+    isLogin() {
+      if (this.login === 'admin' && this.password === 'admin') {
+        router.push('/sessions/')
+      } else {
+        document.getElementById('login').reset()
+        document.getElementById('passwd').reset()
+      }
+    }
+  }
 }
 </script>
 

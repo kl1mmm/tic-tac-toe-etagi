@@ -1,11 +1,17 @@
 import {createRouter, createWebHistory} from "vue-router";
 import AuthPage from "@/components/Pages/AuthPage";
+import SessionsPage from "@/components/Pages/SessionsPage";
 
 const routes = [
     {
         name: 'Авторизация',
-        path: '/',
+        path: '/Auth/',
         component: AuthPage
+    },
+    {
+        name: 'Активные игроки',
+        path: '/sessions/',
+        component: SessionsPage
     }
 ]
 
