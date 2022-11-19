@@ -6,13 +6,16 @@
         Войдите в игру
       </div>
       <div class="login">
-        <InputText id="login" class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;" v-bind:value="login"
-                   @input="login = $event.target.value"></InputText>
+        <InputText id="login" class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"
+                   v-bind:value="login"
+                   @input="login = $event.target.value" @change="toggleBtn"></InputText>
+        <div id="invalidLoginText">Неверный логин</div>
         <InputText id="passwd" class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"
                    v-bind:value="password"
-                   @input="password = $event.target.value"></InputText>
+                   @input="password = $event.target.value" @change="toggleBtn"></InputText>
+        <div id="invalidLoginText">Неверный пароль</div>
+        <MyButton disabled id="subBtn" class="logBtn" @click="isLogin">Войти</MyButton>
       </div>
-      <MyButton class="logBtn" @click="isLogin">Войти</MyButton>
     </div>
   </div>
 </template>
@@ -34,10 +37,28 @@ export default {
   methods: {
     isLogin() {
       if (this.login === 'admin' && this.password === 'admin') {
-        router.push('/sessions/')
+        router.push('/sessions/');
       } else {
-        document.getElementById('login').reset()
-        document.getElementById('passwd').reset()
+        let lg = document.getElementById('login');
+        let pd = document.getElementById('passwd');
+        lg.value = '';
+        pd.value = '';
+        lg.style.border = '1px solid #E93E3E';
+        pd.style.border = '1px solid #E93E3E';
+        document.getElementById('invalidLoginText').style.display = 'block';
+        document.getElementById('invalidLoginText').style.display = 'block';
+        document.getElementById('subBtn').disabled = true;
+        let elms = document.querySelectorAll("[id='invalidLoginText']");
+        for (let i = 0; i < elms.length; i++) {
+          elms[i].style.display = 'block';
+        }
+      }
+    },
+    toggleBtn() {
+      if (this.login && this.password) {
+        document.getElementById('subBtn').disabled = false;
+      } else {
+        document.getElementById('subBtn').disabled = true;
       }
     }
   }
@@ -46,9 +67,6 @@ export default {
 
 <style scoped>
 .block {
-  margin: auto auto;
-  width: 25em;
-  height: 29em;
   box-shadow: 0 0.25em 1.25em rgba(44, 57, 121, 0.09);
   border-radius: 16px;
   background: #FFFFFF;
@@ -62,7 +80,6 @@ export default {
 }
 
 .text {
-  font-family: 'Roboto';
   font-weight: 700;
   font-size: 24px;
   line-height: 150%;
@@ -76,9 +93,26 @@ export default {
 }
 
 .logBtn {
-  margin-top: 1.25em;
+  margin-top: 5%;
   width: 22em;
   height: 3em;
+  margin-bottom: 10%;
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1.5em;
+  margin-left: 1.5em;
+}
+
+#invalidLoginText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.75em;
+  line-height: 135%;
+  color: #E93E3E;
+  text-align: left;
+  display: none;
+}
 </style>
