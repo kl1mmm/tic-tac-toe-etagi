@@ -13,5 +13,7 @@ export default {
 </script>
 
 <style scoped>
-
+.spread {
+  width: 100%;
+}
 </style>

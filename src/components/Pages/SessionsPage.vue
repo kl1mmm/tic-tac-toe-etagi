@@ -11,8 +11,12 @@
             <tbody class="sessionsList" v-for="player in playersData" :key="player.ID">
             <tr>
               <td>{{ player.PlayerName }}</td>
-              <td><MyStatus class="S Free" style="padding: 0.25em 0.75em">{{ player.Status }}</MyStatus></td>
-              <td><MyButton class="MSmall">Позвать играть</MyButton></td>
+              <td>
+                <MyStatus class="S Free" style="padding: 0.25em 0.75em">{{ player.Status }}</MyStatus>
+              </td>
+              <td>
+                <MyButton class="MSmall">Позвать играть</MyButton>
+              </td>
             </tr>
             </tbody>
           </MySpreadsheet>
@@ -33,7 +37,11 @@ export default {
   components: {MyStatus, MyButton, MySpreadsheet, MyNavbar},
   data() {
     return {
-      playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'}]
+      playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
+        {ID: '2', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
+        {ID: '3', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
+        {ID: '4', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
+        {ID: '5', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'}]
     }
   }
 }
@@ -70,8 +78,17 @@ export default {
 }
 
 MySpreadsheet {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
+}
+
+td {
+  padding-top: 2%;
+}
+
+td:nth-child(1) {
+  text-align: left;
+  padding-left: 5%;
 }
 
 td:nth-child(2) {
