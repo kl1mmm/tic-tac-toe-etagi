@@ -58,7 +58,7 @@ button:disabled {
 .MSmall {
   padding: 8px 16px;
   gap: 8px;
-  order-radius: 8px;
+  border-radius: 8px;
 }
 
 .SSmall {

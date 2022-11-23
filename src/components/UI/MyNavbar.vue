@@ -24,7 +24,7 @@
       <a @click="$router.push('/playerslist/')" href="#" class="link">Список игроков</a>
     </div>
     <div class="h-right">
-      <MyIconButton @click="$router.push('/Auth/')" class="ExitBtn"></MyIconButton>
+      <MyIconButton @click="$router.push('/')" class="ExitBtn"></MyIconButton>
     </div>
   </header>
 </template>

@@ -16,11 +16,12 @@ export default {
 <style scoped>
 .screen {
   display: flex;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  justify-content: center;
 }
 
 .auth {
-  position: fixed;
+  flex-direction: column;
+
 }
 </style>

@@ -4,7 +4,18 @@
     <div class="screen">
       <div class="block">
         <div class="table-naming">
-          Рейтинг игроков
+          Активные игроки
+        </div>
+        <div class="table">
+          <MySpreadsheet>
+            <tbody class="sessionsList" v-for="player in playersData" :key="player.ID">
+            <tr>
+              <td>{{ player.PlayerName }}</td>
+              <td><MyStatus class="S Free" style="padding: 0.25em 0.75em">{{ player.Status }}</MyStatus></td>
+              <td><MyButton class="MSmall">Позвать играть</MyButton></td>
+            </tr>
+            </tbody>
+          </MySpreadsheet>
         </div>
       </div>
     </div>
@@ -13,10 +24,18 @@
 
 <script>
 import MyNavbar from "@/components/UI/MyNavbar";
+import MySpreadsheet from "@/components/UI/MySpreadsheet";
+import MyButton from "@/components/UI/MyButton";
+import MyStatus from "@/components/UI/MyStatus";
 
 export default {
   name: "SessionsPage",
-  components: {MyNavbar}
+  components: {MyStatus, MyButton, MySpreadsheet, MyNavbar},
+  data() {
+    return {
+      playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'}]
+    }
+  }
 }
 </script>
 
@@ -49,4 +68,18 @@ export default {
   margin: 4% 0 0 5%;
   text-align: left;
 }
+
+MySpreadsheet {
+  width: 90%;
+  margin: 0 auto;
+}
+
+td:nth-child(2) {
+  text-align: center;
+}
+
+td:nth-child(3) {
+  text-align: center;
+}
+
 </style>

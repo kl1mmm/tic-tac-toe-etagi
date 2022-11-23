@@ -5,7 +5,7 @@ import SessionsPage from "@/components/Pages/SessionsPage";
 const routes = [
     {
         name: 'Авторизация',
-        path: '/Auth/',
+        path: '/',
         component: AuthPage
     },
     {
