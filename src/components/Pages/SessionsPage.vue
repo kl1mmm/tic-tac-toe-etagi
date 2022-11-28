@@ -12,10 +12,13 @@
             <tr>
               <td>{{ player.PlayerName }}</td>
               <td>
-                <MyStatus class="S Free" style="padding: 0.25em 0.75em">{{ player.Status }}</MyStatus>
+                <MyStatus ref="status" :status="player.Status" @load="addClass" class="S"
+                          style="padding: 0.25em 0.75em">
+                  {{ player.Status }}
+                </MyStatus>
               </td>
               <td>
-                <MyButton class="MSmall">Позвать играть</MyButton>
+                <MyButton class="MSmall" :disabled="player.Status !== 'Свободен'">Позвать играть</MyButton>
               </td>
             </tr>
             </tbody>
@@ -38,10 +41,26 @@ export default {
   data() {
     return {
       playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
-        {ID: '2', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
-        {ID: '3', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
-        {ID: '4', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
-        {ID: '5', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'}]
+        {ID: '2', PlayerName: 'Василенко Эрик Платонович', Status: 'В игре'},
+        {ID: '3', PlayerName: 'Быков Юрий Виталиевич', Status: 'Свободен'},
+        {ID: '4', PlayerName: 'Галкин Феликс Платонович', Status: 'Свободен'},
+        {ID: '5', PlayerName: 'Комаров Цефас Александрович', Status: 'Свободен'}]
+    }
+  },
+  methods: {
+    addClass() {
+      if (this.status === 'Свободен') {
+        this.$refs.status.classList.add('Free');
+        console.log(this.status)
+      }
+      if (this.status === 'В игре') {
+        this.$refs.status.add('Blocked');
+        console.log(this.status)
+      }
+      if (this.status === 'Не в сети') {
+        this.$refs.status.classList.add('OutOfGame');
+        console.log(this.status)
+      }
     }
   }
 }
