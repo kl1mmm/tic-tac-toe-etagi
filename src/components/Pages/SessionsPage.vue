@@ -12,8 +12,7 @@
             <tr>
               <td>{{ player.PlayerName }}</td>
               <td>
-                <MyStatus ref="status" class="S"
-                          style="padding: 0.25em 0.75em">
+                <MyStatus ref="status" v-model="player.Status" class="S" style="padding: 0.25em 0.75em">
                   {{ player.Status }}
                 </MyStatus>
               </td>
