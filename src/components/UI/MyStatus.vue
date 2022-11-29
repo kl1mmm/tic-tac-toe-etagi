@@ -16,22 +16,6 @@ div {
   vertical-align: middle;
   font-weight: 400;
 }
-.Free {
-  background: #A8D37F;
-}
-
-.Blocked {
-  background: #EC7777;
-}
-
-.InGame {
-  background: #87CAE8;
-}
-
-.OutOfGame {
-  background: #EDEDED;
-  color: #373745;
-}
 
 .M {
   padding: 4px 12px;
@@ -52,5 +36,22 @@ div {
   line-height: 24px;
   letter-spacing: 0.25px;
   color: #FFFFFF;
+}
+
+.Free {
+  background: #A8D37F;
+}
+
+.Blocked {
+  background: #EC7777;
+}
+
+.InGame {
+  background: #87CAE8;
+}
+
+.OutOfGame {
+  background: #EDEDED;
+  color: #373745;
 }
 </style>

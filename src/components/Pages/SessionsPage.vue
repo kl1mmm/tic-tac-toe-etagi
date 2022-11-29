@@ -12,12 +12,13 @@
             <tr>
               <td>{{ player.PlayerName }}</td>
               <td>
-                <MyStatus ref="status" v-model="player.Status" class="S" style="padding: 0.25em 0.75em">
+                <MyStatus class="S" style="padding: 0.25em 0.75em">
                   {{ player.Status }}
                 </MyStatus>
               </td>
               <td>
-                <MyButton class="MSmall" :disabled="player.Status !== 'Свободен'">Позвать играть</MyButton>
+                <MyButton class="MSmall" :disabled="player.Status !== 'Свободен'">Позвать играть
+                </MyButton>
               </td>
             </tr>
             </tbody>
@@ -42,13 +43,27 @@ export default {
       playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
         {ID: '2', PlayerName: 'Василенко Эрик Платонович', Status: 'В игре'},
         {ID: '3', PlayerName: 'Быков Юрий Виталиевич', Status: 'Свободен'},
-        {ID: '4', PlayerName: 'Галкин Феликс Платонович', Status: 'Свободен'},
+        {ID: '4', PlayerName: 'Галкин Феликс Платонович', Status: 'Вне игры'},
         {ID: '5', PlayerName: 'Комаров Цефас Александрович', Status: 'Свободен'}]
     }
   },
-  methods: {
-    addClass() {
-    }
+  mounted() {
+    let statuses = document.querySelectorAll('.S')
+    statuses.forEach((item) => {
+          if (item.innerText === 'Свободен') {
+            item.classList.add('Free')
+          }
+          if (item.innerText === 'В игре') {
+            item.classList.add('InGame')
+          }
+          if (item.innerText === 'Вне игры') {
+            item.classList.add('OutOfGame')
+          }
+          if (item.innerText === 'Заблокирован') {
+            item.classList.add('Blocked')
+          }
+        }
+    )
   }
 }
 </script>
