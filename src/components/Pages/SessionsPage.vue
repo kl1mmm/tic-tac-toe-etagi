@@ -12,7 +12,7 @@
             <tr>
               <td>{{ player.PlayerName }}</td>
               <td>
-                <MyStatus ref="status" :status="player.Status" @load="addClass" class="S"
+                <MyStatus ref="status" class="S"
                           style="padding: 0.25em 0.75em">
                   {{ player.Status }}
                 </MyStatus>
@@ -49,18 +49,6 @@ export default {
   },
   methods: {
     addClass() {
-      if (this.status === 'Свободен') {
-        this.$refs.status.classList.add('Free');
-        console.log(this.status)
-      }
-      if (this.status === 'В игре') {
-        this.$refs.status.add('Blocked');
-        console.log(this.status)
-      }
-      if (this.status === 'Не в сети') {
-        this.$refs.status.classList.add('OutOfGame');
-        console.log(this.status)
-      }
     }
   }
 }
