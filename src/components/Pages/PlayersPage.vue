@@ -2,9 +2,13 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
+      <MyPopUp class="Popup"></MyPopUp>
       <div class="block">
-        <div class="table-naming">
-          Список игроков
+        <div class="top-of-table">
+          <div class="table-naming">
+            Список игроков
+          </div>
+          <MyButton @click="showPopupInfo">Добавить игрока</MyButton>
         </div>
         <div class="table">
           <MySpreadsheet class="spreadSheet">
@@ -23,13 +27,14 @@
             <tr v-for="player in playersData" :key="player.ID">
               <td class="row">{{ player.PlayerName }}</td>
               <td class="row">{{ player.Age }}</td>
-              <td class="row"><img alt="Мужской" class="sex" src="@/components/UI/pics/MaleSex.svg" v-if="player.Sex === 'Мужской'">
+              <td class="row"><img alt="Мужской" class="sex" src="@/components/UI/pics/MaleSex.svg"
+                                   v-if="player.Sex === 'Мужской'">
                 <img alt="Женский" class="sex" src="@/components/UI/pics/FemaleSex.svg" v-if="player.Sex === 'Женский'">
               </td>
               <td class="row">
                 <MyStatus class="M"
                           :class="{'Free': player.Status==='Активен', 'Blocked': player.Status ==='Заблокирован'}"
-                          style="width: 75%; padding: 0.25em 0.75em">
+                          style="width: 70%; padding: 0.25em 0.75em">
                   {{ player.Status }}
                 </MyStatus>
               </td>
@@ -57,10 +62,11 @@ import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyStatus from "@/components/UI/MyStatus";
 import MyButton from "@/components/UI/MyButton.vue";
+import MyPopUp from "@/components/UI/MyPopUp.vue";
 
 export default {
   name: "SessionsPage",
-  components: {MyButton, MyStatus, MySpreadsheet, MyNavbar},
+  components: {MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
   data() {
     return {
       playersData: [
@@ -92,6 +98,11 @@ export default {
           DateOfEdit: '22 октября 2021'
         }]
     }
+  },
+  methods: {
+    ShowPopupInfo() {
+
+    }
   }
 }
 </script>
@@ -120,11 +131,16 @@ export default {
   padding-right: 2.5%;
 }
 
+.top-of-table {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4%;
+}
+
 .table-naming {
+  line-height: 200%;
   font-weight: 700;
   font-size: 1.5em;
-  line-height: 150%;
-  margin-top: 4%;
   text-align: left;
 }
 
@@ -143,5 +159,13 @@ th {
 
 tr {
   box-shadow: inset 0 -1px 0 #EEEFF5;
+}
+
+.Popup {
+  padding: 1.5em;
+  position: fixed;
+  top: 35%;
+  left: 37.5%;
+  width: 20%;
 }
 </style>
