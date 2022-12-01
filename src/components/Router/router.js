@@ -3,6 +3,7 @@ import AuthPage from "@/components/Pages/AuthPage";
 import SessionsPage from "@/components/Pages/SessionsPage";
 import RatingPage from "@/components/Pages/RatingPage";
 import HistoryPage from "@/components/Pages/HistoryPage";
+import PlayersPage from "@/components/Pages/PlayersPage";
 
 const routes = [
     {
@@ -24,6 +25,11 @@ const routes = [
         name: 'История игр',
         path: '/history/',
         component: HistoryPage
+    },
+    {
+        name: 'Список игркоов',
+        path: '/players-list/',
+        component: PlayersPage
     }
 ]
 

@@ -21,7 +21,7 @@
       <a @click="$router.push('/rating/')" href="#" class="link">Рейтинг</a>
       <a @click="$router.push('/sessions/')" href="#" class="link">Активные игроки</a>
       <a @click="$router.push('/history/')" href="#" class="link">История игр</a>
-      <a @click="$router.push('/playerslist/')" href="#" class="link">Список игроков</a>
+      <a @click="$router.push('/players-list/')" href="#" class="link">Список игроков</a>
     </div>
     <div class="h-right">
       <MyIconButton @click="$router.push('/')" class="ExitBtn"></MyIconButton>
