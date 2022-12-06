@@ -1,29 +1,29 @@
 <template>
   <div class="v-popup">
-    <img class="closeImg" alt="X" style="float: right" src="@/components/UI/pics/exit.svg">
+    <img class="closeImg" @click="closePopup()" alt="X" style="float: right" src="@/components/UI/pics/exit.svg">
     <div class="nameTag">Добавить игрока</div>
     <div class="nickname">
       <div class="text" style="text-align: left;">ФИО</div>
-      <InputText class="inp" type="text" placeholder="Иванов Иван Иванович"></InputText>
+      <InputText :value="userName" @input="userName = $event.target.value" class="inp" type="text" placeholder="Иванов Иван Иванович"></InputText>
     </div>
     <div class="lowBlock">
       <div class="age">
         <div class="text">Возраст</div>
-        <InputText class="inp" type="text" placeholder="0"></InputText>
+        <InputText :value="userAge" @input="userAge = $event.target.value" class="inp" type="text" placeholder="0"></InputText>
       </div>
       <div class="sex">
         <div class="text">Пол</div>
         <label>
-          <input class="inpSex" type='radio' value='Женский' name='sex'>
+          <input class="inpSex" type='radio' value="Женский" @input="userSex = $event.target.value" name='sex'>
           <span class='woman'><img alt="Ж" class="picSex" src="@/components/UI/pics/FemaleSex.svg"></span>
         </label>
         <label>
-          <input class="inpSex" type='radio' value='man' name='sex'>
+          <input class="inpSex" type='radio' value="Мужской" @input="userSex = $event.target.value" name='sex'>
           <span class='man'><img alt="М" class="picSex" src="@/components/UI/pics/MaleSex.svg"></span>
         </label>
       </div>
     </div>
-    <MyButton class="btnAdd">Добавить</MyButton>
+    <MyButton class="btnAdd" @click="addNewPlayer">Добавить</MyButton>
   </div>
 </template>
 
@@ -33,7 +33,15 @@ import MyButton from "@/components/UI/MyButton.vue";
 
 export default {
   name: "MyPopUp",
-  components: {MyButton, InputText}
+  components: {MyButton, InputText},
+  methods: {
+    closePopup() {
+      this.$emit('closePopup');
+    },
+    addNewPlayer() {
+      this.$emit('addNewPlayer', this.userName, this.userAge, this.userSex)
+    }
+  }
 }
 </script>
 

@@ -2,13 +2,14 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-      <MyPopUp class="Popup"></MyPopUp>
+      <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
+               v-if="isPopupVisible"></MyPopUp>
       <div class="block">
         <div class="top-of-table">
           <div class="table-naming">
             Список игроков
           </div>
-          <MyButton @click="showPopupInfo">Добавить игрока</MyButton>
+          <MyButton @click="showPopupInfo()" @closePopup="closePopupInfo()">Добавить игрока</MyButton>
         </div>
         <div class="table">
           <MySpreadsheet class="spreadSheet">
@@ -69,6 +70,7 @@ export default {
   components: {MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
   data() {
     return {
+      isPopupVisible: false,
       playersData: [
         {
           ID: '1',
@@ -100,8 +102,30 @@ export default {
     }
   },
   methods: {
-    ShowPopupInfo() {
-
+    showPopupInfo() {
+      this.isPopupVisible = true;
+    },
+    closePopupInfo() {
+      this.isPopupVisible = false;
+    },
+    addNewPlayerInConsole(userName, userAge, userSex) {
+      this.playersData.push({
+        ID: '4',
+        PlayerName: userName,
+        Age: userAge,
+        Sex: userSex,
+        Status: 'Активен',
+        DateOfCreate: new Date().toLocaleDateString('RU', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }).split('г.')[0],
+        DateOfEdit: new Date().toLocaleDateString('RU', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }).split('г.')[0]
+      })
     }
   }
 }
