@@ -42,10 +42,10 @@
               <td class="row">{{ player.DateOfCreate }}</td>
               <td class="row">{{ player.DateOfEdit }}</td>
               <td class="row">
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Активен'">
+                <MyButton class="Secondary MSmall" v-if="player.Status === 'Активен'" @click="player.Status = 'Заблокирован'">
                   <img alt="Ø" class="blockImg" src="@/components/UI/pics/Stop.svg"> Заблокировать
                 </MyButton>
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Заблокирован'">
+                <MyButton class="Secondary MSmall" v-if="player.Status === 'Заблокирован'" @click="player.Status = 'Активен'">
                   Разблокировать
                 </MyButton>
               </td>
@@ -73,7 +73,7 @@ export default {
       isPopupVisible: false,
       playersData: [
         {
-          ID: '1',
+          ID: 1,
           PlayerName: 'Александров Игнат Анатолиевич',
           Age: '24',
           Sex: 'Женский',
@@ -82,7 +82,7 @@ export default {
           DateOfEdit: '22 октября 2021'
         },
         {
-          ID: '2',
+          ID: 2,
           PlayerName: 'Мартынов Остап Фёдорович',
           Age: '12',
           Sex: 'Женский',
@@ -91,7 +91,7 @@ export default {
           DateOfEdit: '22 октября 2021'
         },
         {
-          ID: '3',
+          ID: 3,
           PlayerName: 'Комаров Цефас Александрович',
           Age: '83',
           Sex: 'Мужской',
@@ -110,7 +110,7 @@ export default {
     },
     addNewPlayerInConsole(userName, userAge, userSex) {
       this.playersData.push({
-        ID: this.playersData[-1].ID + 1, // Нужно учесть, что нет проверки на пустоту списка!
+        ID: this.playersData.length + 1, // Нужно учесть, что нет проверки на пустоту списка!
         PlayerName: userName,
         Age: userAge,
         Sex: userSex,
