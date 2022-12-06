@@ -110,7 +110,7 @@ export default {
     },
     addNewPlayerInConsole(userName, userAge, userSex) {
       this.playersData.push({
-        ID: '4',
+        ID: this.playersData[-1].ID + 1, // Нужно учесть, что нет проверки на пустоту списка!
         PlayerName: userName,
         Age: userAge,
         Sex: userSex,
