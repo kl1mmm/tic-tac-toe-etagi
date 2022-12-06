@@ -1,4 +1,4 @@
-![изображение](https://user-images.githubusercontent.com/89641101/205895234-e599c8bb-4f4b-469b-a803-5fc07896ec4f.png)
+![изображение](https://user-images.githubusercontent.com/89641101/205895367-6a3bfac3-4e9d-4313-b181-69e0e302c1ef.png)
 
 #Hello guys!
 
