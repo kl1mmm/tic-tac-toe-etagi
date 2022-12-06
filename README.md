@@ -1,5 +1,3 @@
-![изображение](https://user-images.githubusercontent.com/89641101/205895367-6a3bfac3-4e9d-4313-b181-69e0e302c1ef.png)
-
 #Hello guys!
 
 You are in the git repository of my pet project "Tic-Tac-Toy". I realize it on the basis of training activities, interning with the company "ETAGI".
