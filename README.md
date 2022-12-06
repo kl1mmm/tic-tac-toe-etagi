@@ -1,6 +1,6 @@
 #Hello guys!
 
-You are in the git repository of my pet project "Tic-Tac-Toy". I realize it on the basis of training activities, interning with the company "ETAGI".
+You are in the git repository of my pet project "Tic-Tac-Toe". I realize it on the basis of training activities, interning with the company "ETAGI".
 
 In this project, some of you guys will be able to find answers to questions on how to use together Vue, TailwindCSS, Django and PostgreeSQL. In this way you will be able to capture something useful for yourself. I will be glad of your attention to my activities!
 
