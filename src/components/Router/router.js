@@ -4,6 +4,7 @@ import SessionsPage from "@/components/Pages/SessionsPage";
 import RatingPage from "@/components/Pages/RatingPage";
 import HistoryPage from "@/components/Pages/HistoryPage";
 import PlayersPage from "@/components/Pages/PlayersPage";
+import GamePage from "@/components/Pages/GamePage.vue";
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         name: 'Список игркоов',
         path: '/players-list/',
         component: PlayersPage
+    },
+    {
+        name: 'Активаная игра',
+        path: '/game/',
+        component: GamePage
     }
 ]
 
