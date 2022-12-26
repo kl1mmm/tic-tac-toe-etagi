@@ -50,9 +50,7 @@ export default {
   data() {
     return {
       activePlayer: 'O',
-      gameStatus: 'turn',
-      gameStatusMessage: `O's turn`,
-      gameStatusColor: 'statusTurn',
+      gameStatus: 'Turn',
       moves: 0, // (max = 9)
       cells: {
         1: '', 2: '', 3: '',
@@ -65,78 +63,6 @@ export default {
         [1, 5, 9], [3, 5, 7]             // диагонали
       ],
     }
-  },
-  watch: {
-    gameStatus() {
-      if (this.gameStatus === 'win') {
-        this.gameStatusColor = 'statusWin'
-        this.gameStatusMessage = `${this.activePlayer} Wins !`
-        return
-      } else if (this.gameStatus === 'draw') {
-        this.gameStatusColor = 'statusDraw'
-        this.gameStatusMessage = 'Draw !'
-        return
-      }
-      this.gameStatusMessage = `${this.activePlayer}'s turn`
-    }
-  },
-  methods: {
-    computed: {
-      changePlayer() {
-        this.activePlayer = this.nonActivePlayer();
-      },
-      nonActivePlayer() {
-        if (this.activePlayer === 'O') {
-          return 'X'
-        } else {
-          return 'O'
-        }
-      },
-      gameIsWon() {
-        Event.$emit('win', this.activePlayer)
-        this.gameStatusMessage = `${this.activePlayer} Wins !`
-        Event.$emit('freeze')
-        return 'win'
-      },
-      changeGameStatus() {
-        if (this.checkForWin()) {
-          return this.gameIsWon()
-        } else if (this.moves === 9) {
-          return 'draw'
-        } else {
-          return 'turn'
-        }
-      },
-      areEqual() {      // Вспомогательная функция для сравнения значений ячейки
-        let len = arguments.length;
-        for (let i = 1; i < len; i++) {
-          if (arguments[i] === '' || arguments[i] !== arguments[i - 1])
-            return false;
-        }
-        return true;
-      },
-      checkForWin() {
-        for (let i = 0; i < this.winConditions.length; i++) {
-          let wc = this.winConditions[i];
-          let cells = this.cells;
-          if (this.areEqual(cells[wc[0]], cells[wc[1]], cells[wc[2]])) {
-            return true
-          }
-        }
-        return false
-      }
-    }
-  },
-  mounted() {
-    Event.$on('strike', (cellNumber) => {
-      this.cells[cellNumber] = this.activePlayer;
-      this.moves++;
-      this.gameStatus = this.changeGameStatus();
-      this.changePlayer();
-    })
-    Event.$on('gridReset', () => {
-      Object.assign(this.$data, this.$options.data());
-    })
   }
 }
 </script>

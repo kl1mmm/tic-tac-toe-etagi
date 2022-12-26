@@ -1,5 +1,5 @@
 <template>
-  <div class="default" v-on:click="strike">
+  <div class="default">
     <svg ref="X" class="cross" width="185" height="197" viewBox="0 0 155 163" fill="none"
          xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_di_9_273)">
@@ -60,34 +60,7 @@
 
 <script>
 export default {
-  name: "MyCell",
-  data() {
-    return {
-      frozen: false,
-      mark: ''
-    }
-  },
-  methods: {
-    strike() {
-      if (!this.frozen) {
-        this.mark = this.$parent.activePlayer;
-        if (this.mark === '0') {
-          this.$refs.O.style.display = 'block';
-        } else {
-          this.$refs.X.style.display = 'block';
-        }
-        this.frozen = true;
-        Event.$emit('strike', this.name);
-        this.$parent.$options.methods.changePlayer();
-      }
-    }
-  },
-  mounted() {
-    Event.$on('clearCell', () => {
-      this.frozen = false
-    })
-    Event.$on('freeze', () => this.frozen = true)
-  }
+  name: "MyCell"
 }
 </script>
 
