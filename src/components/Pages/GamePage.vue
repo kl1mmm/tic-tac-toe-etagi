@@ -9,8 +9,10 @@
           <tr v-for="player in playersData" :key="player.ID">
             <div class="row">
               <div class="column">
-                <td><img alt="O" class="imgTeam" src="@/components/UI/pics/ZeroPlayer1.svg" v-if="player.Team === 'Zero'">
-                  <img alt="X" class="imgTeam" src="@/components/UI/pics/CrossPlayer2.svg" v-if="player.Team === 'Cross'"></td>
+                <td><img alt="O" class="imgTeam" src="@/components/UI/pics/ZeroPlayer1.svg"
+                         v-if="player.Team === 'Zero'">
+                  <img alt="X" class="imgTeam" src="@/components/UI/pics/CrossPlayer2.svg"
+                       v-if="player.Team === 'Cross'"></td>
                 <td class="playerName">{{ player.PlayerName }}</td>
               </div>
               <td class="percent">{{ player.PercentOfWins }} побед</td>
@@ -19,7 +21,10 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyTimer class="timer"></MyTimer>
+      <div class="gameBlock">
+        <MyTimer class="timer"></MyTimer>
+        <MyGrid style="width: 30%; height: 30%;"></MyGrid>
+      </div>
     </div>
   </div>
 </template>
@@ -28,10 +33,11 @@
 import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet.vue";
 import MyTimer from "@/components/UI/MyTimer.vue";
+import MyGrid from "@/components/UI/Grid.vue";
 
 export default {
   name: "HistoryPage",
-  components: {MyTimer, MyNavbar, MySpreadsheet},
+  components: {MyGrid, MyTimer, MyNavbar, MySpreadsheet},
   data() {
     return {
       playersData: [{
@@ -72,7 +78,10 @@ export default {
   margin: 2%;
 }
 
-.timer {margin: 2%}
+.timer {
+  width: 20%;
+  margin: 2% auto;
+}
 
 .tableName {
   font-style: normal;
@@ -103,4 +112,5 @@ export default {
   letter-spacing: 0.25px;
   color: #898993;
 }
+
 </style>
