@@ -54,4 +54,15 @@ div {
   background: #EDEDED;
   color: #373745;
 }
+
+.TurnSide {
+  background: #373745;
+  box-shadow: 0 4px 20px rgba(44, 57, 121, 0.09);
+  border-radius: 12px;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5em;
+}
 </style>
