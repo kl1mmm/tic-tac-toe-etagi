@@ -64,5 +64,8 @@ div {
   font-weight: 400;
   font-size: 20px;
   line-height: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

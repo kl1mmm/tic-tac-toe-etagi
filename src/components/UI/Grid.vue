@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="gameBlock">
+    <MyTimer class="timer"></MyTimer>
     <table class="grid">
       <tbody>
       <tr>
@@ -37,17 +38,22 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus class="TurnSide Status">{{  }}</MyStatus>
+    <MyStatus class="TurnSide status">Ходит
+      <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'" src="@/components/UI/pics/ZeroPlayer1.svg">
+      <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'" src="@/components/UI/pics/CrossPlayer2.svg">
+    </MyStatus>
   </div>
 </template>
 
 <script>
 import MyCell from "@/components/UI/Cell.vue";
 import MyStatus from "@/components/UI/MyStatus.vue";
+import MyTimer from "@/components/UI/MyTimer.vue";
 
 export default {
   name: "MyGrid",
-  components: {MyStatus, MyCell},
+  props: ['pushName'],
+  components: {MyStatus, MyCell, MyTimer},
   data() {
     return {
       activePlayer: 'O',
@@ -69,28 +75,40 @@ export default {
   methods: {
     changePlayer() {
       if (this.activePlayer === 'O') {
-        this.activePlayer = 'X'
+        this.activePlayer = 'X';
       } else {
-        this.activePlayer = 'O'
+        this.activePlayer = 'O';
       }
       this.moves++;
+      this.$emit('activePlayer');
     }
   }
 }
 </script>
 
 <style scoped>
-.grid {
-  width: 100%;
-  height: 100%;
-  border-collapse: collapse;
+.gameBlock {
 }
 
-.Status {
+.grid {
+  margin: 0 auto;
+}
+
+.timer {
+  width: 8em;
+  height: 3.5em;
+  margin: 0 auto;
+}
+
+.status {
   height: 3em;
-  width: 200%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 20em;
+  margin: 0 auto;
+}
+
+.turnImg {
+  height: 1.5em;
+  width: 1.5em;
+  margin-left: 0.75em;
 }
 </style>

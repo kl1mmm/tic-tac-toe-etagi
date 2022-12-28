@@ -43,7 +43,8 @@ export default {
   background: #EDEDED;
   padding: 1%;
   border-radius: 12px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .time {
@@ -51,5 +52,6 @@ export default {
   font-size: 2.125em;
   letter-spacing: 0.015625em;
   color: #373745;
+  align-self: center;
 }
 </style>

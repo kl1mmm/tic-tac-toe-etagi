@@ -21,10 +21,7 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <div class="gameBlock">
-        <MyTimer class="timer"></MyTimer>
-        <MyGrid style="width: 30%; height: 30%;"></MyGrid>
-      </div>
+      <MyGrid class="gameGrid" style="width: 30%; height: 30%;"></MyGrid>
     </div>
   </div>
 </template>
@@ -32,12 +29,11 @@
 <script>
 import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet.vue";
-import MyTimer from "@/components/UI/MyTimer.vue";
 import MyGrid from "@/components/UI/Grid.vue";
 
 export default {
   name: "HistoryPage",
-  components: {MyGrid, MyTimer, MyNavbar, MySpreadsheet},
+  components: {MyGrid, MyNavbar, MySpreadsheet},
   data() {
     return {
       playersData: [{
@@ -76,11 +72,7 @@ export default {
   border-radius: 1.25em;
   padding: 1% 1% 0 1%;
   margin: 2%;
-}
-
-.timer {
-  width: 20%;
-  margin: 2% auto;
+  height: 25%;
 }
 
 .tableName {
@@ -113,4 +105,9 @@ export default {
   color: #898993;
 }
 
+.gameGrid {
+  height: 100%;
+  margin: 2% auto;
+  width: 100%;
+}
 </style>
