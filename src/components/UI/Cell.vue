@@ -18,8 +18,10 @@ export default {
     Step(player) {
       if (player === 'O') {
         this.$refs.cross.style.display = 'block';
+        this.mark = 'O';
       } else {
         this.$refs.zero.style.display = 'block';
+        this.mark = 'X';
       }
       this.$refs.btn.disabled = true;
       this.$emit('changePlayer');

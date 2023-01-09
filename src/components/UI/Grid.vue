@@ -39,8 +39,10 @@
       </tbody>
     </table>
     <MyStatus class="TurnSide status">Ходит
-      <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'" src="@/components/UI/pics/ZeroPlayer1.svg">
-      <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'" src="@/components/UI/pics/CrossPlayer2.svg">
+      <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
+           src="@/components/UI/pics/ZeroPlayer1.svg">
+      <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
+           src="@/components/UI/pics/CrossPlayer2.svg">
     </MyStatus>
   </div>
 </template>
@@ -81,9 +83,41 @@ export default {
       }
       this.moves++;
       this.$emit('activePlayer');
+      this.changeGameStatus();
+    },
+    //   areEqual() { // Вспомогательная функция для определения наличия победной комбинации.
+    //     let len = arguments.length;
+    //     for (let i = 1; i < len; i++) {
+    //       if (arguments[i] === '' || arguments[i] !== arguments[i - 1])
+    //         return false;
+    //     }
+    //     return true;
+    //   }
+    // },
+    checkForWin() {
+      for (let i = 0; i <= this.winConditions.length; i++) {
+        let wc = this.winConditions[i];
+        let cells = this.cells;
+        console.log(cells);
+        if (cells[wc[0]].mark === cells[wc[1]].mark === cells[wc[2]].mark) {
+          return true;
+        }
+      }
+      return false;
+    },
+    changeGameStatus() {
+      if (this.checkForWin()) {
+        this.$emit('win', this.activePlayer);
+        return 'win';
+      } else if (this.moves === 9) {
+        return 'draw';
+      } else {
+        return 'turn';
+      }
     }
   }
 }
+
 </script>
 
 <style scoped>
