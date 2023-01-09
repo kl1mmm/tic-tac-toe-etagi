@@ -1,4 +1,4 @@
-<template>
+<template v-model="markOfCell">
   <button ref="btn" class="default" v-on:click="Step(this.activePlayer)">
     <img alt="X" ref="cross" class="cross" width="185" height="197" src="@/components/UI/pics/cross.svg">
     <img alt="O" ref="zero" class="zero" width="185" height="197" src="@/components/UI/pics/zero.svg">
@@ -11,20 +11,20 @@ export default {
   props: ['activePlayer'],
   data() {
     return {
-      mark: '',
+      markOfCell: '',
     }
   },
   methods: {
     Step(player) {
       if (player === 'O') {
         this.$refs.cross.style.display = 'block';
-        this.mark = 'O';
+        this.markOfCell = 'X';
       } else {
         this.$refs.zero.style.display = 'block';
-        this.mark = 'X';
+        this.markOfCell = 'O';
       }
       this.$refs.btn.disabled = true;
-      this.$emit('changePlayer');
+      this.$emit('changePlayer', 'markOfCell');
     }
   }
 }

@@ -54,7 +54,7 @@ import MyTimer from "@/components/UI/MyTimer.vue";
 
 export default {
   name: "MyGrid",
-  props: ['pushName'],
+  props: ['pushName', 'markOfCell'],
   components: {MyStatus, MyCell, MyTimer},
   data() {
     return {
@@ -95,11 +95,10 @@ export default {
     //   }
     // },
     checkForWin() {
-      for (let i = 0; i <= this.winConditions.length; i++) {
+      for (let i = 0; i < this.winConditions.length; i++) {
         let wc = this.winConditions[i];
         let cells = this.cells;
-        console.log(cells);
-        if (cells[wc[0]].mark === cells[wc[1]].mark === cells[wc[2]].mark) {
+        if (cells[wc[0]] === cells[wc[1]] === cells[wc[2]]) {
           return true;
         }
       }
