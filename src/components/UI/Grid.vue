@@ -5,35 +5,35 @@
       <tbody>
       <tr>
         <td>
-          <MyCell name="1" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="1" @click="this.cells[1] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="2" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="2" @click="this.cells[2] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="3" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <MyCell name="4" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="5" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="6" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="3" @click="this.cells[3] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       <tr>
         <td>
-          <MyCell name="7" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="4" @click="this.cells[4] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="8" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="5" @click="this.cells[5] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="9" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="6" @click="this.cells[6] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <MyCell name="7" @click="this.cells[7] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="8" @click="this.cells[8] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="9" @click="this.cells[9] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       </tbody>
