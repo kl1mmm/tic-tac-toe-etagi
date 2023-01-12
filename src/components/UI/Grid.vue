@@ -5,35 +5,44 @@
       <tbody>
       <tr>
         <td>
-          <MyCell name="1" @click="this.cells[1] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="1" @click="this.cells[1] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="2" @click="this.cells[2] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="2" @click="this.cells[2] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="3" @click="this.cells[3] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <MyCell name="4" @click="this.cells[4] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="5" @click="this.cells[5] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="6" @click="this.cells[6] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="3" @click="this.cells[3] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       <tr>
         <td>
-          <MyCell name="7" @click="this.cells[7] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="4" @click="this.cells[4] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="8" @click="this.cells[8] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="5" @click="this.cells[5] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="9" @click="this.cells[9] = this.activePlayer" :activePlayer='this.activePlayer' v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="6" @click="this.cells[6] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <MyCell name="7" @click="this.cells[7] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="8" @click="this.cells[8] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="9" @click="this.cells[9] = this.activePlayer" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       </tbody>
@@ -85,34 +94,34 @@ export default {
       this.$emit('activePlayer');
       this.changeGameStatus();
     },
-    //   areEqual() { // Вспомогательная функция для определения наличия победной комбинации.
-    //     let len = arguments.length;
-    //     for (let i = 1; i < len; i++) {
-    //       if (arguments[i] === '' || arguments[i] !== arguments[i - 1])
-    //         return false;
-    //     }
-    //     return true;
-    //   }
-    // },
-    checkForWin() {
-      for (let i = 0; i < this.winConditions.length; i++) {
-        let wc = this.winConditions[i];
-        let cells = this.cells;
-        if (cells[wc[0]] === cells[wc[1]] === cells[wc[2]]) {
-          return true;
-        }
+    areEqual() { // Вспомогательная функция для определения наличия победной комбинации.
+      let len = arguments.length;
+      for (let i = 1; i < len; i++) {
+        if (arguments[i] === '' || arguments[i] !== arguments[i - 1])
+          return false;
       }
-      return false;
-    },
-    changeGameStatus() {
-      if (this.checkForWin()) {
-        this.$emit('win', this.activePlayer);
-        return 'win';
-      } else if (this.moves === 9) {
-        return 'draw';
-      } else {
-        return 'turn';
+      return true;
+    }
+  },
+  checkForWin() {
+    for (let i = 0; i < this.winConditions.length; i++) {
+      let wc = this.winConditions[i];
+      let cells = this.cells;
+      if (this.areEqual(cells[wc[0]], cells[wc[1]], cells[wc[2]])) {
+        return true;
       }
+    }
+    return false;
+  },
+  changeGameStatus() {
+    if (this.checkForWin()) {
+      this.$emit('win', this.activePlayer);
+      alert('Win!')
+      return 'win';
+    } else if (this.moves === 9) {
+      return 'draw';
+    } else {
+      return 'turn';
     }
   }
 }
