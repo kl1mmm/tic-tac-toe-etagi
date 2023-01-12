@@ -84,16 +84,6 @@ export default {
     }
   },
   methods: {
-    changePlayer() {
-      if (this.activePlayer === 'O') {
-        this.activePlayer = 'X';
-      } else {
-        this.activePlayer = 'O';
-      }
-      this.moves++;
-      this.$emit('activePlayer');
-      this.changeGameStatus();
-    },
     areEqual() { // Вспомогательная функция для определения наличия победной комбинации.
       let len = arguments.length;
       for (let i = 1; i < len; i++) {
@@ -101,27 +91,36 @@ export default {
           return false;
       }
       return true;
-    }
-  },
-  checkForWin() {
-    for (let i = 0; i < this.winConditions.length; i++) {
-      let wc = this.winConditions[i];
-      let cells = this.cells;
-      if (this.areEqual(cells[wc[0]], cells[wc[1]], cells[wc[2]])) {
-        return true;
+    },
+    checkForWin() {
+      for (let i = 0; i < this.winConditions.length; i++) {
+        let wc = this.winConditions[i];
+        let cells = this.cells;
+        if (this.areEqual(cells[wc[0]], cells[wc[1]], cells[wc[2]])) {
+          return true;
+        }
       }
-    }
-    return false;
-  },
-  changeGameStatus() {
-    if (this.checkForWin()) {
-      this.$emit('win', this.activePlayer);
-      alert('Win!')
-      return 'win';
-    } else if (this.moves === 9) {
-      return 'draw';
-    } else {
-      return 'turn';
+      return false;
+    },
+    changeGameStatus() {
+      if (this.checkForWin()) {
+        this.$emit('Win', this.activePlayer);
+        return 'Win';
+      } else if (this.moves === 9) {
+        return 'Draw';
+      } else {
+        return 'Turn';
+      }
+    },
+    changePlayer() {
+      if (this.activePlayer === 'O') {
+        this.activePlayer = 'X';
+      } else {
+        this.activePlayer = 'O';
+      }
+      this.moves++;
+      this.changeGameStatus();
+      this.$emit('activePlayer');
     }
   }
 }
