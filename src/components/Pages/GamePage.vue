@@ -2,6 +2,7 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
+      <MyModal class="Popup" v-if="isModalVisible"></MyModal>
       <div class="playersTable">
         <div class="tableName">Игроки</div>
         <MySpreadsheet>
@@ -21,7 +22,7 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid class="gameGrid" style="width: 30%; height: 30%;"></MyGrid>
+      <MyGrid v-model="this.playersData" @gameWin="gameWin" class="gameGrid" style="width: 30%; height: 30%;"></MyGrid>
     </div>
   </div>
 </template>
@@ -30,12 +31,14 @@
 import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet.vue";
 import MyGrid from "@/components/UI/Grid.vue";
+import MyModal from "@/components/UI/MyModal.vue";
 
 export default {
   name: "HistoryPage",
-  components: {MyGrid, MyNavbar, MySpreadsheet},
+  components: {MyGrid, MyNavbar, MySpreadsheet, MyModal},
   data() {
     return {
+      isModalVisible: false,
       playersData: [{
         ID: '1',
         PlayerName: 'Пупкин Владлен Игоревич',
@@ -48,6 +51,11 @@ export default {
           PercentOfWins: '23%',
           Team: 'Cross'
         }]
+    }
+  },
+  methods: {
+    gameWin() {
+      this.isModalVisible = true;
     }
   }
 }
@@ -93,7 +101,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 1.25em;
-  letter-spacing: 0.15px;
+  letter-spacing: 0.01em;
   color: #373745;
 }
 
@@ -101,7 +109,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 0.875em;
-  letter-spacing: 0.25px;
+  letter-spacing: 0.0156em;
   color: #898993;
 }
 
@@ -109,5 +117,13 @@ export default {
   height: 100%;
   margin: 2% auto;
   width: 100%;
+}
+
+.Popup {
+  padding: 1.5em;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  width: 17.5%;
 }
 </style>

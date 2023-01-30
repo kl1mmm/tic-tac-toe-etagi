@@ -40,6 +40,7 @@ export default {
     },
     addNewPlayer() {
       this.$emit('addNewPlayer', this.userName, this.userAge, this.userSex)
+      this.closePopup();
     }
   }
 }

@@ -5,49 +5,49 @@
       <tbody>
       <tr>
         <td>
-          <MyCell name="1" @click="this.cells[1] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="1" @click="this.cells[1] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="2" @click="this.cells[2] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="2" @click="this.cells[2] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="3" @click="this.cells[3] = this.activePlayer" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <MyCell name="4" @click="this.cells[4] = this.activePlayer" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="5" @click="this.cells[5] = this.activePlayer" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
-        </td>
-        <td>
-          <MyCell name="6" @click="this.cells[6] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="3" @click="this.cells[3] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       <tr>
         <td>
-          <MyCell name="7" @click="this.cells[7] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="4" @click="this.cells[4] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="8" @click="this.cells[8] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="5" @click="this.cells[5] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="9" @click="this.cells[9] = this.activePlayer" :activePlayer='this.activePlayer'
+          <MyCell name="6" @click="this.cells[6] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <MyCell name="7" @click="this.cells[7] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="8" @click="this.cells[8] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
+                  v-on:changePlayer="changePlayer"></MyCell>
+        </td>
+        <td>
+          <MyCell name="9" @click="this.cells[9] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
       </tr>
       </tbody>
     </table>
-    <MyStatus class="TurnSide status">Ходит
+    <MyStatus :playersData="playersData" class="TurnSide status">Ходит
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
@@ -63,7 +63,7 @@ import MyTimer from "@/components/UI/MyTimer.vue";
 
 export default {
   name: "MyGrid",
-  props: ['pushName', 'markOfCell'],
+  props: ['playersData', 'markOfCell'],
   components: {MyStatus, MyCell, MyTimer},
   data() {
     return {
@@ -104,7 +104,7 @@ export default {
     },
     changeGameStatus() {
       if (this.checkForWin()) {
-        this.$emit('Win', this.activePlayer);
+        this.$emit('gameWin', this.activePlayer); //Нужно доработать проверку: Верифицирует на следующий шаг после победного.
         return 'Win';
       } else if (this.moves === 9) {
         return 'Draw';
@@ -113,13 +113,13 @@ export default {
       }
     },
     changePlayer() {
+      this.changeGameStatus();
       if (this.activePlayer === 'O') {
         this.activePlayer = 'X';
       } else {
         this.activePlayer = 'O';
       }
       this.moves++;
-      this.changeGameStatus();
       this.$emit('activePlayer');
     }
   }
