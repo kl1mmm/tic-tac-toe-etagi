@@ -5,30 +5,24 @@
       <tbody>
       <tr>
         <td>
-          <MyCell name="1" @click="this.cells[1] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="1" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="2" @click="this.cells[2] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="2" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="3" @click="this.cells[3] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="3" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
       </tr>
       <tr>
         <td>
-          <MyCell name="4" @click="this.cells[4] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="4" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="5" @click="this.cells[5] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="5" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="6" @click="this.cells[6] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="6" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
       </tr>
       <tr>
@@ -37,12 +31,10 @@
                   v-on:changePlayer="changePlayer"></MyCell>
         </td>
         <td>
-          <MyCell name="8" @click="this.cells[8] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="8" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="9" @click="this.cells[9] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell name="9" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
         </td>
       </tr>
       </tbody>
@@ -102,18 +94,21 @@ export default {
       }
       return false;
     },
-    changeGameStatus() {
+    changeGameStatus(event) {
+      this.cells[Number(event.target.name)] = this.activePlayer ///////////////////////////////////////////
+
       if (this.checkForWin()) {
         this.$emit('gameWin', this.activePlayer); //Нужно доработать проверку: Верифицирует на следующий шаг после победного.
         return 'Win';
       } else if (this.moves === 9) {
         return 'Draw';
       } else {
+        this.changePlayer() ///////////////////////////////////////////
         return 'Turn';
       }
     },
     changePlayer() {
-      this.changeGameStatus();
+      // this.changeGameStatus() ///////////////////////////////////////////
       if (this.activePlayer === 'O') {
         this.activePlayer = 'X';
       } else {
@@ -121,10 +116,11 @@ export default {
       }
       this.moves++;
       this.$emit('activePlayer');
+
+
     }
   }
 }
-
 </script>
 
 <style scoped>
