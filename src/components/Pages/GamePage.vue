@@ -23,6 +23,7 @@
         </MySpreadsheet>
       </div>
       <MyGrid v-model="this.playersData" @gameWin="gameWin" class="gameGrid" style="width: 30%; height: 30%;"></MyGrid>
+      <MyChat class="usersChat" style="width: 30%; height: 100%;"></MyChat>
     </div>
   </div>
 </template>
@@ -32,10 +33,11 @@ import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet.vue";
 import MyGrid from "@/components/UI/Grid.vue";
 import MyModal from "@/components/UI/MyModal.vue";
+import MyChat from "@/components/UI/MyChat.vue";
 
 export default {
   name: "HistoryPage",
-  components: {MyGrid, MyNavbar, MySpreadsheet, MyModal},
+  components: {MyChat, MyGrid, MyNavbar, MySpreadsheet, MyModal},
   data() {
     return {
       isModalVisible: false,
@@ -125,5 +127,9 @@ export default {
   top: 35%;
   left: 50%;
   width: 17.5%;
+}
+
+.usersChat {
+
 }
 </style>

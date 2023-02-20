@@ -1,31 +1,55 @@
 <template>
-  <div class="bubble">
+  <div class="bubble zero" v-if="msg.side === 'zero'">
     <div class="upper_info">
-    <div class="name"></div>
-    <div class="time"></div>
+      <div class="name">{{ msg.userName }}</div>
+      <div class="time">{{ msg.timeArr }}</div>
     </div>
-    <div class="msg"></div>
+    <div class="msg">{{ msg.Text }}</div>
+  </div>
+  <div class="bubble cross" v-if="msg.side === 'cross'">
+    <div class="upper_info">
+      <div class="name">{{ msg.userName }}</div>
+      <div class="time">{{ msg.timeArr }}</div>
+    </div>
+    <div class="msg">{{ msg.Text }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ChatMsg"
+  name: "ChatMsg",
+  props: ['msg']
 }
 </script>
 
 <style scoped>
 .bubble {
-  border-radius: 16px 16px 16px 0;
   box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
   background: #FFFFFF;
   font-size: 14px;
   font-style: normal;
+  padding-bottom: 3%;
   gap: 0.5em;
+  margin-bottom: 15px;
+}
+
+.cross {
+  border-radius: 16px 16px 16px 0;
+}
+
+.zero {
+  border-radius: 16px 16px 0 16px;
+}
+
+.cross .name {
+  color: #60C2AA;
+}
+
+.zero .name {
+  color: #E38BAC;
 }
 
 .name {
-  color: #60C2AA;
   line-height: 20px;
   font-weight: 500;
   padding-left: 0.75em;
@@ -40,6 +64,7 @@ export default {
 .msg {
   font-size: 16px;
   line-height: 24px;
+  text-align: left;
   padding: 0.5em 0.75em 0 0.75em;
 }
 

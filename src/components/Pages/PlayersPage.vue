@@ -42,10 +42,12 @@
               <td class="row">{{ player.DateOfCreate }}</td>
               <td class="row">{{ player.DateOfEdit }}</td>
               <td class="row">
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Активен'" @click="player.Status = 'Заблокирован'">
+                <MyButton class="Secondary MSmall" v-if="player.Status === 'Активен'"
+                          @click="player.Status = 'Заблокирован'">
                   <img alt="Ø" class="blockImg" src="@/components/UI/pics/Stop.svg"> Заблокировать
                 </MyButton>
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Заблокирован'" @click="player.Status = 'Активен'">
+                <MyButton class="Secondary MSmall" v-if="player.Status === 'Заблокирован'"
+                          @click="player.Status = 'Активен'">
                   Разблокировать
                 </MyButton>
               </td>
@@ -53,6 +55,9 @@
             </tbody>
           </MySpreadsheet>
         </div>
+      </div>
+      <div class="chat">
+        <MyChat></MyChat>
       </div>
     </div>
   </div>
@@ -64,10 +69,11 @@ import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyStatus from "@/components/UI/MyStatus";
 import MyButton from "@/components/UI/MyButton.vue";
 import MyPopUp from "@/components/UI/MyPopUp.vue";
+import MyChat from "@/components/UI/MyChat.vue";
 
 export default {
   name: "SessionsPage",
-  components: {MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
+  components: {MyChat, MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
   data() {
     return {
       isPopupVisible: false,
