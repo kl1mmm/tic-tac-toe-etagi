@@ -38,7 +38,7 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus :playersData="playersData" class="TurnSide status">Ходит
+    <MyStatus class="TurnSide status">Ходит
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
@@ -60,7 +60,6 @@ export default {
     return {
       activePlayer: 'O',
       gameStatus: 'Turn',
-      turnSideText: '',
       moves: 0, // (max = 9)
       cells: {
         1: '', 2: '', 3: '',

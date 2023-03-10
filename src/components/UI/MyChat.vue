@@ -34,19 +34,19 @@ export default {
           timeArr: '13:40',
           userName: 'Плюшкина Екатерина',
           Text: 'Привет!',
-          side: 'cross'
+          side: 'Cross'
         },
         {
           timeArr: '13:41',
           userName: 'Пупкин Владлен',
           Text: 'Привет.',
-          side: 'zero'
+          side: 'Zero'
         },
         {
           timeArr: '13:43',
           userName: 'Пупкин Владлен',
           Text: 'Играем или как?',
-          side: 'zero'
+          side: 'Zero'
         }
       ]
     }
@@ -60,7 +60,7 @@ export default {
         }).split(',')[1],
         userName: 'Admin',
         Text: this.msgText,
-        side: 'zero'
+        side: 'Zero'
       })
       this.msgText = '';
     }
