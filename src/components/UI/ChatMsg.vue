@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .bubble {
+  width: 80%;
   box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
   background: #FFFFFF;
   font-size: 14px;
@@ -34,10 +35,14 @@ export default {
 }
 
 .cross {
+  margin-left: 0;
+  margin-right: auto;
   border-radius: 16px 16px 16px 0;
 }
 
 .zero {
+  margin-right: 0;
+  margin-left: auto;
   border-radius: 16px 16px 0 16px;
 }
 

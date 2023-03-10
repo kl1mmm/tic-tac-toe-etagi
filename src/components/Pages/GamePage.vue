@@ -22,8 +22,8 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid v-model="this.playersData" @gameWin="gameWin" class="gameGrid" style="width: 30%; height: 30%;"></MyGrid>
-      <MyChat class="usersChat" style="width: 30%; height: 100%;"></MyChat>
+      <MyGrid v-model="this.playersData" @gameWin="gameWin" class="gameGrid"></MyGrid>
+      <MyChat v-model="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
 </template>
@@ -116,20 +116,21 @@ export default {
 }
 
 .gameGrid {
-  height: 100%;
+  width: 30%;
+  height: 80%;
   margin: 2% auto;
-  width: 100%;
 }
 
 .Popup {
   padding: 1.5em;
   position: fixed;
   top: 35%;
-  left: 50%;
+  left: 37.5%;
   width: 17.5%;
 }
 
 .usersChat {
-
+  height: 80%;
+  width: 25%;
 }
 </style>

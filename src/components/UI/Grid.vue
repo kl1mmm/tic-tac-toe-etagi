@@ -5,36 +5,35 @@
       <tbody>
       <tr>
         <td>
-          <MyCell name="1" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
+          <MyCell id="1" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="2" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
+          <MyCell id="2" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="3" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <MyCell name="4" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
-        </td>
-        <td>
-          <MyCell name="5" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
-        </td>
-        <td>
-          <MyCell name="6" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
+          <MyCell id="3" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
       </tr>
       <tr>
         <td>
-          <MyCell name="7" @click="this.cells[7] = this.activePlayer/*; changePlayer();*/" :activePlayer='this.activePlayer'
-                  v-on:changePlayer="changePlayer"></MyCell>
+          <MyCell id="4" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="8" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
+          <MyCell id="5" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
         <td>
-          <MyCell name="9" @click="changeGameStatus" :activePlayer='this.activePlayer'></MyCell>
+          <MyCell id="6" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <MyCell id="7" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
+        </td>
+        <td>
+          <MyCell id="8" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
+        </td>
+        <td>
+          <MyCell id="9" @click="changeGameStatus" :activePlayer='activePlayer'></MyCell>
         </td>
       </tr>
       </tbody>
@@ -89,26 +88,34 @@ export default {
         let wc = this.winConditions[i];
         let cells = this.cells;
         if (this.areEqual(cells[wc[0]], cells[wc[1]], cells[wc[2]])) {
-          return true;
+          return wc;
         }
       }
-      return false;
+      return null;
     },
     changeGameStatus(event) {
-      this.cells[Number(event.target.name)] = this.activePlayer ///////////////////////////////////////////
-
-      if (this.checkForWin()) {
-        this.$emit('gameWin', this.activePlayer); //Нужно доработать проверку: Верифицирует на следующий шаг после победного.
+      this.cells[Number(event.target.id)] = this.activePlayer
+      let wc = this.checkForWin();
+      if (wc !== null) {
+        this.$emit('gameWin', this.activePlayer);
+        if (this.cells[wc[0]] === 'X') {
+          for (let i = 0; i <= wc.length; i++) {
+            document.getElementById(String(wc[i])).classList.add('winZero');
+          }
+        } else if (this.cells[wc[0]] === 'O') {
+          for (let i = 0; i <= wc.length; i++) {
+            document.getElementById(String(wc[i])).classList.add('winCross');
+          }
+        }
         return 'Win';
       } else if (this.moves === 9) {
         return 'Draw';
       } else {
-        this.changePlayer() ///////////////////////////////////////////
+        this.changePlayer()
         return 'Turn';
       }
     },
     changePlayer() {
-      // this.changeGameStatus() ///////////////////////////////////////////
       if (this.activePlayer === 'O') {
         this.activePlayer = 'X';
       } else {
@@ -125,6 +132,11 @@ export default {
 
 <style scoped>
 .gameBlock {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .grid {

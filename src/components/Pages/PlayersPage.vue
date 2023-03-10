@@ -56,9 +56,6 @@
           </MySpreadsheet>
         </div>
       </div>
-      <div class="chat">
-        <MyChat></MyChat>
-      </div>
     </div>
   </div>
 </template>
@@ -69,11 +66,10 @@ import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyStatus from "@/components/UI/MyStatus";
 import MyButton from "@/components/UI/MyButton.vue";
 import MyPopUp from "@/components/UI/MyPopUp.vue";
-import MyChat from "@/components/UI/MyChat.vue";
 
 export default {
   name: "SessionsPage",
-  components: {MyChat, MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
+  components: {MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
   data() {
     return {
       isPopupVisible: false,

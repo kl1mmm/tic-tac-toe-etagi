@@ -54,4 +54,12 @@ export default {
   display: none;
   margin: auto;
 }
+
+.winCross {
+  background: #CFEDE6;
+}
+
+.winZero {
+  background: #F3BBD0;
+}
 </style>
