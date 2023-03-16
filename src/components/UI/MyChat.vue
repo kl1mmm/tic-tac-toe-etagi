@@ -1,7 +1,9 @@
 <template>
   <div class="chat">
+    <div class="messagesArr">
     <div class="message">
-      <ChatMsg v-for="msg in messagesData" :key="msg" :msg="msg"></ChatMsg>
+        <ChatMsg v-for="msg in messagesData" :key="msg" :msg="msg"></ChatMsg>
+    </div>
     </div>
     <div class="sendMsg">
       <InputText id="inp" class="msgInp" placeholder="Сообщение..." :value="msgText"
@@ -104,5 +106,9 @@ export default {
   margin: 0.75em;
   padding: 0.75em;
   text-align: center;
+}
+
+.messagesArr {
+  overflow-y: auto;
 }
 </style>

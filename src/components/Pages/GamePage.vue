@@ -2,7 +2,7 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-      <MyModal class="Popup" v-if="isModalVisible"></MyModal>
+        <MyModal class="Popup" v-if="isModalVisible"></MyModal>
       <div class="playersTable">
         <div class="tableName">Игроки</div>
         <MySpreadsheet>

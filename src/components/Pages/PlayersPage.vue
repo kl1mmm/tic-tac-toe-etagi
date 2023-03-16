@@ -2,8 +2,8 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-      <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
-               v-if="isPopupVisible"></MyPopUp>
+        <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
+                 v-if="isPopupVisible"></MyPopUp>
       <div class="block">
         <div class="top-of-table">
           <div class="table-naming">

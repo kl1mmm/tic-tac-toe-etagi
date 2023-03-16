@@ -24,11 +24,12 @@ button {
   line-height: 24px;
   color: #FFFFFF;
   align-content: center;
+  transition: background 0.1s ease-in;
 }
 
 button:hover {
   background: #3BA189;
-  transition: 0.05s;
+  transition: background 0.15s ease-out;
 }
 
 button:disabled {

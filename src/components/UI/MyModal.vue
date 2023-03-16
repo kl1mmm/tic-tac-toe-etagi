@@ -19,6 +19,7 @@ export default {
     },
     newGame() {
       this.closePopup();
+      location.reload();
     }
   }
 }

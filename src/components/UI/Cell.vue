@@ -55,11 +55,12 @@ export default {
   margin: auto;
 }
 
-.winCross {
+.winCross, .winCross:hover {
   background: #CFEDE6;
 }
 
-.winZero {
+.winZero, .winZero:hover {
   background: #F3BBD0;
 }
+
 </style>

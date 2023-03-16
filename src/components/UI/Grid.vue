@@ -38,11 +38,13 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus class="TurnSide status">Ходит
+    <MyStatus :playersData="playersData" class="TurnSide status">
+      Ходит
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
            src="@/components/UI/pics/CrossPlayer2.svg">
+      <div class="playerName" v-for="player in playersData" :key="player.ID" >{{ player.PlayerName }}</div>
     </MyStatus>
   </div>
 </template>
@@ -117,8 +119,10 @@ export default {
     changePlayer() {
       if (this.activePlayer === 'O') {
         this.activePlayer = 'X';
+        console.log(this.playersData.PlayerName);
       } else {
         this.activePlayer = 'O';
+        console.log(this.playersData.PlayerName);
       }
       this.moves++;
       this.$emit('activePlayer');

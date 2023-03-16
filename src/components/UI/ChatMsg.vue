@@ -1,18 +1,18 @@
 <template>
-  <div class="bubble zero" v-if="msg.side === 'Zero'">
-    <div class="upper_info">
-      <div class="name">{{ msg.userName }}</div>
-      <div class="time">{{ msg.timeArr }}</div>
+    <div class="bubble zero" v-if="msg.side === 'Zero'">
+      <div class="upper_info">
+        <div class="name">{{ msg.userName }}</div>
+        <div class="time">{{ msg.timeArr }}</div>
+      </div>
+      <div class="msg">{{ msg.Text }}</div>
     </div>
-    <div class="msg">{{ msg.Text }}</div>
-  </div>
-  <div class="bubble cross" v-if="msg.side === 'Cross'">
-    <div class="upper_info">
-      <div class="name">{{ msg.userName }}</div>
-      <div class="time">{{ msg.timeArr }}</div>
+    <div class="bubble cross" v-if="msg.side === 'Cross'">
+      <div class="upper_info">
+        <div class="name">{{ msg.userName }}</div>
+        <div class="time">{{ msg.timeArr }}</div>
+      </div>
+      <div class="msg">{{ msg.Text }}</div>
     </div>
-    <div class="msg">{{ msg.Text }}</div>
-  </div>
 </template>
 
 <script>
