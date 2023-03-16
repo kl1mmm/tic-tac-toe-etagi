@@ -1,7 +1,13 @@
 <template>
-  <div class="v-popup">
-    <img alt="Победа!" class="winImg" src="@/components/UI/pics/winImg.svg">
-    <div class="nameTag">Владлен Пупкин победил!</div>
+  <div class="v-popup" v-if="gameStatus === 'Win'">
+    <div v-if="gameStatus === 'Win'">
+      <img alt="Победа!" class="winImg" src="@/components/UI/pics/winImg.svg">
+      <div class="nameTag">Владлен Пупкин победил!</div>
+    </div>
+    <div v-if="gameStatus === 'Draw'">
+      <img alt="Ничья" class="winImg" src="@/components/UI/pics/winImg.svg">
+      <div class="nameTag">Победила дружба!</div>
+    </div>
     <MyButton class="btnAdd" @click="newGame()">Новая игра</MyButton>
     <MyButton class="Secondary btnAdd" @click="$router.push('/sessions/')">Выйти в меню</MyButton>
   </div>
@@ -13,6 +19,7 @@ import MyButton from "@/components/UI/MyButton.vue";
 export default {
   name: "MyPopUp",
   components: {MyButton},
+  props: ['gameStatus'],
   methods: {
     closePopup() {
       this.$emit('closePopup');

@@ -2,7 +2,7 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-        <MyModal class="Popup" v-if="isModalVisible"></MyModal>
+        <MyModal class="Popup" v-bind:gameStatus="Status" v-if="isModalVisible"></MyModal>
       <div class="playersTable">
         <div class="tableName">Игроки</div>
         <MySpreadsheet>
@@ -22,7 +22,7 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid v-model="this.playersData" @gameWin="gameWin" class="gameGrid"></MyGrid>
+      <MyGrid v-model="this.playersData" v-bind:inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
       <MyChat v-model="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       isModalVisible: false,
+      Status: 'Turn',
       playersData: [{
         ID: '1',
         PlayerName: 'Пупкин Владлен Игоревич',
@@ -56,8 +57,9 @@ export default {
     }
   },
   methods: {
-    gameWin() {
+    gameEnd(someStatus) {
       this.isModalVisible = true;
+      this.Status = someStatus;
     }
   }
 }

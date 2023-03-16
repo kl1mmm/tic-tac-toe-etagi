@@ -44,7 +44,7 @@
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
            src="@/components/UI/pics/CrossPlayer2.svg">
-      <div class="playerName" v-for="player in playersData" :key="player.ID" >{{ player.PlayerName }}</div>
+      <div class="playerName" v-for="player in playersData" :key="player.ID">{{ player.PlayerName }}</div>
     </MyStatus>
   </div>
 </template>
@@ -56,7 +56,7 @@ import MyTimer from "@/components/UI/MyTimer.vue";
 
 export default {
   name: "MyGrid",
-  props: ['playersData', 'markOfCell'],
+  props: ['playersData', 'markOfCell', 'inGameStatus'],
   components: {MyStatus, MyCell, MyTimer},
   data() {
     return {
@@ -95,10 +95,11 @@ export default {
       return null;
     },
     changeGameStatus(event) {
-      this.cells[Number(event.target.id)] = this.activePlayer
+      this.cells[Number(event.target.id)] = this.activePlayer;
+      this.gameStatus = 'Win';
       let wc = this.checkForWin();
       if (wc !== null) {
-        this.$emit('gameWin', this.activePlayer);
+        this.$emit('gameEnd', this.gameStatus);
         if (this.cells[wc[0]] === 'X') {
           for (let i = 0; i <= wc.length; i++) {
             document.getElementById(String(wc[i])).classList.add('winZero');
@@ -110,6 +111,8 @@ export default {
         }
         return 'Win';
       } else if (this.moves === 9) {
+        this.gameStatus = 'Draw';
+        this.$emit('gameEnd', this.gameStatus);
         return 'Draw';
       } else {
         this.changePlayer()
@@ -119,15 +122,11 @@ export default {
     changePlayer() {
       if (this.activePlayer === 'O') {
         this.activePlayer = 'X';
-        console.log(this.playersData.PlayerName);
       } else {
         this.activePlayer = 'O';
-        console.log(this.playersData.PlayerName);
       }
       this.moves++;
       this.$emit('activePlayer');
-
-
     }
   }
 }
