@@ -1,11 +1,11 @@
 <template>
-  <div class="v-popup" v-if="gameStatus === 'Win'">
+  <div class="v-popup">
     <div v-if="gameStatus === 'Win'">
       <img alt="Победа!" class="winImg" src="@/components/UI/pics/winImg.svg">
       <div class="nameTag">Владлен Пупкин победил!</div>
     </div>
     <div v-if="gameStatus === 'Draw'">
-      <img alt="Ничья" class="winImg" src="@/components/UI/pics/winImg.svg">
+      <img alt="Ничья" class="winImg" src="@/components/UI/pics/handshake.png">
       <div class="nameTag">Победила дружба!</div>
     </div>
     <MyButton class="btnAdd" @click="newGame()">Новая игра</MyButton>

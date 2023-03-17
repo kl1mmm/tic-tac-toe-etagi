@@ -22,7 +22,7 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid v-model="this.playersData" v-bind:inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
+      <MyGrid v-model="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
       <MyChat v-model="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
@@ -58,8 +58,9 @@ export default {
   },
   methods: {
     gameEnd(someStatus) {
-      this.isModalVisible = true;
       this.Status = someStatus;
+      console.log(this.Status);
+      this.isModalVisible = true;
     }
   }
 }

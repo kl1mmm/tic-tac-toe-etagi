@@ -95,6 +95,7 @@ export default {
       return null;
     },
     changeGameStatus(event) {
+      this.moves++;
       this.cells[Number(event.target.id)] = this.activePlayer;
       this.gameStatus = 'Win';
       let wc = this.checkForWin();
@@ -110,12 +111,12 @@ export default {
           }
         }
         return 'Win';
-      } else if (this.moves === 9) {
+      } else if ((this.moves === 9) & (wc === null)) {
         this.gameStatus = 'Draw';
         this.$emit('gameEnd', this.gameStatus);
         return 'Draw';
       } else {
-        this.changePlayer()
+        this.changePlayer();
         return 'Turn';
       }
     },
@@ -125,7 +126,6 @@ export default {
       } else {
         this.activePlayer = 'O';
       }
-      this.moves++;
       this.$emit('activePlayer');
     }
   }
