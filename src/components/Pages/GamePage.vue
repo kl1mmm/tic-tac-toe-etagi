@@ -22,8 +22,8 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid v-model="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
-      <MyChat v-model="this.playersData" class="usersChat"></MyChat>
+      <MyGrid @playersInfo="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
+      <MyChat @playersInfo="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
 </template>
@@ -127,7 +127,7 @@ export default {
   padding: 1.5em;
   position: fixed;
   top: 35%;
-  left: 37.5%;
+  left: 39%;
   width: 17.5%;
 }
 

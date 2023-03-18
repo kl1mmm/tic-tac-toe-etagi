@@ -27,7 +27,7 @@ import ChatMsg from "@/components/UI/ChatMsg.vue";
 export default {
   name: "MyChat",
   components: {ChatMsg, MyButton, InputText},
-  props: ['playersData'],
+  props: ['playersInfo'],
   data() {
     return {
       msgText: '',

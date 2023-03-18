@@ -38,13 +38,11 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus :playersData="playersData" class="TurnSide status">
-      Ходит
+    <MyStatus class="TurnSide status">Ходит
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
            src="@/components/UI/pics/CrossPlayer2.svg">
-      <div class="playerName" v-for="player in playersData" :key="player.ID">{{ player.PlayerName }}</div>
     </MyStatus>
   </div>
 </template>
@@ -56,7 +54,7 @@ import MyTimer from "@/components/UI/MyTimer.vue";
 
 export default {
   name: "MyGrid",
-  props: ['playersData', 'markOfCell', 'inGameStatus'],
+  props: ['playersInfo', 'markOfCell', 'inGameStatus'],
   components: {MyStatus, MyCell, MyTimer},
   data() {
     return {
