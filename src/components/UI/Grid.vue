@@ -43,6 +43,8 @@
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
            src="@/components/UI/pics/CrossPlayer2.svg">
+<!--      <div v-if="this.activePlayer==='X'">{{ this.playersInfo[0].PlayerName }}</div>-->
+<!--      <div v-if="this.activePlayer==='O'">{{ this.playersInfo[1].PlayerName }}</div>-->
     </MyStatus>
   </div>
 </template>
