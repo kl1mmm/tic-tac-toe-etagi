@@ -34,21 +34,21 @@ export default {
       messagesData: [
         {
           timeArr: '13:40',
-          userName: 'Плюшкина Екатерина',
+          userName: this.playersInfo[0].PlayerName.slice(0, this.playersInfo[0].PlayerName.lastIndexOf(' ')),
           Text: 'Привет!',
-          side: 'Cross'
+          side: this.playersInfo[0].Team
         },
         {
           timeArr: '13:41',
-          userName: 'Пупкин Владлен',
+          userName: this.playersInfo[1].PlayerName.slice(0, this.playersInfo[1].PlayerName.lastIndexOf(' ')),
           Text: 'Привет.',
-          side: 'Zero'
+          side: this.playersInfo[1].Team
         },
         {
           timeArr: '13:43',
-          userName: 'Пупкин Владлен',
+          userName: this.playersInfo[1].PlayerName.slice(0, this.playersInfo[1].PlayerName.lastIndexOf(' ')),
           Text: 'Играем или как?',
-          side: 'Zero'
+          side: this.playersInfo[1].Team
         }
       ]
     }
