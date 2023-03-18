@@ -2,7 +2,7 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-        <MyModal class="Popup" v-bind:gameStatus="Status" v-if="isModalVisible"></MyModal>
+      <MyModal class="Popup" :winner="winner" :gameStatus="Status" v-if="isModalVisible"></MyModal>
       <div class="playersTable">
         <div class="tableName">Игроки</div>
         <MySpreadsheet>
@@ -22,8 +22,8 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid @playersInfo="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
-      <MyChat @playersInfo="this.playersData" class="usersChat"></MyChat>
+      <MyGrid :playersInfo="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
+      <MyChat :playersInfo="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
 </template>
@@ -42,6 +42,7 @@ export default {
     return {
       isModalVisible: false,
       Status: 'Turn',
+      winner: null,
       playersData: [{
         ID: '1',
         PlayerName: 'Пупкин Владлен Игоревич',
@@ -57,8 +58,12 @@ export default {
     }
   },
   methods: {
-    gameEnd(someStatus) {
+    gameEnd(someStatus, winPlayer) {
       this.Status = someStatus;
+      if (this.Status === 'Win') {
+        this.winner = winPlayer;
+      }
+      console.log(this.winner);
       this.isModalVisible = true;
     }
   }

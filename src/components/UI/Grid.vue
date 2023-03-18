@@ -38,13 +38,18 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus class="TurnSide status">Ходит
+    <MyStatus class="TurnSide status">
+      <div class="statusText">Ходит</div>
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
       <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
            src="@/components/UI/pics/CrossPlayer2.svg">
-<!--      <div v-if="this.activePlayer==='X'">{{ this.playersInfo[0].PlayerName }}</div>-->
-<!--      <div v-if="this.activePlayer==='O'">{{ this.playersInfo[1].PlayerName }}</div>-->
+      <div class="statusText" v-if="this.activePlayer==='X'">
+        {{ this.playersInfo[0].PlayerName.slice(0, this.playersInfo[0].PlayerName.lastIndexOf(' ')) }}
+      </div>
+      <div class="statusText" v-if="this.activePlayer==='O'">
+        {{ this.playersInfo[1].PlayerName.slice(0, this.playersInfo[1].PlayerName.lastIndexOf(' ')) }}
+      </div>
     </MyStatus>
   </div>
 </template>
@@ -62,6 +67,7 @@ export default {
     return {
       activePlayer: 'O',
       gameStatus: 'Turn',
+      winnerName: '',
       moves: 0, // (max = 9)
       cells: {
         1: '', 2: '', 3: '',
@@ -101,13 +107,16 @@ export default {
       let wc = this.checkForWin();
       if (wc !== null) {
         this.$refs.timer.stopTheTimer();
-        this.$emit('gameEnd', this.gameStatus);
         if (this.cells[wc[0]] === 'X') {
           for (let i = 0; i <= wc.length; i++) {
+            this.winnerName = this.playersInfo[0].PlayerName.slice(0, this.playersInfo[0].PlayerName.lastIndexOf(' '));
+            this.$emit('gameEnd', this.gameStatus, this.winnerName);
             document.getElementById(String(wc[i])).classList.add('winZero');
           }
         } else if (this.cells[wc[0]] === 'O') {
           for (let i = 0; i <= wc.length; i++) {
+            this.winnerName = this.playersInfo[1].PlayerName.slice(0, this.playersInfo[1].PlayerName.lastIndexOf(' '));
+            this.$emit('gameEnd', this.gameStatus, this.winnerName);
             document.getElementById(String(wc[i])).classList.add('winCross');
           }
         }
@@ -115,7 +124,7 @@ export default {
       } else if ((this.moves === 9) & (wc === null)) {
         this.$refs.timer.stopTheTimer();
         this.gameStatus = 'Draw';
-        this.$emit('gameEnd', this.gameStatus);
+        this.$emit('gameEnd', this.gameStatus, null);
         return 'Draw';
       } else {
         this.changePlayer();
@@ -163,5 +172,13 @@ export default {
   height: 1.5em;
   width: 1.5em;
   margin-left: 0.75em;
+  margin-right: 0.75em;
+}
+
+.statusText {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5em;
 }
 </style>

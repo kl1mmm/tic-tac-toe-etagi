@@ -2,7 +2,7 @@
   <div class="v-popup">
     <div v-if="gameStatus === 'Win'">
       <img alt="Победа!" class="winImg" src="@/components/UI/pics/winImg.svg">
-      <div class="nameTag">Владлен Пупкин победил!</div>
+      <div class="nameTag">{{ this.winner }} победил!</div>
     </div>
     <div v-if="gameStatus === 'Draw'">
       <img alt="Ничья" class="winImg" src="@/components/UI/pics/handshake.png">
@@ -19,7 +19,7 @@ import MyButton from "@/components/UI/MyButton.vue";
 export default {
   name: "MyPopUp",
   components: {MyButton},
-  props: ['gameStatus'],
+  props: ['gameStatus', 'winner'],
   methods: {
     closePopup() {
       this.$emit('closePopup');
