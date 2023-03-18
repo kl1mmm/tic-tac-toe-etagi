@@ -1,6 +1,6 @@
 <template>
   <div class="gameBlock">
-    <MyTimer class="timer"></MyTimer>
+    <MyTimer class="timer" ref="timer"></MyTimer>
     <table class="grid">
       <tbody>
       <tr>
@@ -100,6 +100,7 @@ export default {
       this.gameStatus = 'Win';
       let wc = this.checkForWin();
       if (wc !== null) {
+        this.$refs.timer.stopTheTimer();
         this.$emit('gameEnd', this.gameStatus);
         if (this.cells[wc[0]] === 'X') {
           for (let i = 0; i <= wc.length; i++) {
@@ -112,6 +113,7 @@ export default {
         }
         return 'Win';
       } else if ((this.moves === 9) & (wc === null)) {
+        this.$refs.timer.stopTheTimer();
         this.gameStatus = 'Draw';
         this.$emit('gameEnd', this.gameStatus);
         return 'Draw';

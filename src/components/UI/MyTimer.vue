@@ -11,17 +11,17 @@ export default {
     return {
       timeMin: 0,
       timeSec: 0,
-      miliseconds: 0,
+      milliseconds: 0,
       interval: null,
     }
   },
   mounted() {
     const watch = this.$refs.watch;
     clearInterval(this.interval);
-    localStorage.removeItem('startTime')
-    localStorage.setItem('startTime', (new Date().getTime()).toString())
+    localStorage.removeItem('startTime');
+    localStorage.setItem('startTime', (new Date().getTime()).toString());
     this.interval = setInterval(() => {
-      this.miliseconds += 10;
+      this.milliseconds += 10;
       this.timeSec = (((new Date().getTime()) - localStorage.getItem('startTime')) / 1000);
       if (this.timeSec >= 60) {
         this.timeMin = Math.floor(this.timeSec / 60);
@@ -30,9 +30,14 @@ export default {
       } else {
         watch.innerHTML = (('0' + this.timeMin).slice(-2)) + ":" + (('0' + Math.floor(this.timeSec)).slice(-2));
       }
-      // let dateTimer = new Date(this.miliseconds);
+      // let dateTimer = new Date(this.milliseconds);
       // watch.innerHTML = ('0' + dateTimer.getUTCMinutes()).slice(-2) + ':' + ('0' + dateTimer.getUTCSeconds()).slice(-2);
     }, 10)
+  },
+  methods: {
+    stopTheTimer() {
+      clearInterval(this.interval);
+    }
   }
 }
 </script>

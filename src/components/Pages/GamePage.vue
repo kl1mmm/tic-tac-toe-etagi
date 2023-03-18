@@ -59,7 +59,6 @@ export default {
   methods: {
     gameEnd(someStatus) {
       this.Status = someStatus;
-      console.log(this.Status);
       this.isModalVisible = true;
     }
   }
