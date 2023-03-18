@@ -22,7 +22,7 @@
           </tbody>
         </MySpreadsheet>
       </div>
-      <MyGrid :playersInfo="this.playersData" @inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
+      <MyGrid :playersInfo="this.playersData" :inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
       <MyChat :playersInfo="this.playersData" class="usersChat"></MyChat>
     </div>
   </div>
