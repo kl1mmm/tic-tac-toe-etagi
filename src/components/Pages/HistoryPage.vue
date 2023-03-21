@@ -134,4 +134,20 @@ tr {
   width: 1.25em;
   height: 1.25em;
 }
+
+@media screen and (max-width: 1600px) {
+  .block {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1336px) {
+  .block {
+    width: 75%;
+  }
+
+  .table-naming {
+    font-size: 1.35em;
+  }
+}
 </style>

@@ -103,7 +103,7 @@ export default {
 
 .block {
   background: #ffffff;
-  width: 48.5%;
+  width: 50%;
   height: 90%;
   box-shadow: 0 4px 20px rgba(44, 57, 121, 0.09);
   border-radius: 40px;
@@ -134,5 +134,21 @@ th {
 
 tr {
   box-shadow: inset 0 -1px 0 #EEEFF5;
+}
+
+@media screen and (max-width: 1600px) {
+  .block {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1336px) {
+  .block {
+    width: 65%;
+  }
+
+  .table-naming {
+    font-size: 1.35em;
+  }
 }
 </style>

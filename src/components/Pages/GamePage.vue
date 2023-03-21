@@ -112,6 +112,7 @@ export default {
   font-size: 1.25em;
   letter-spacing: 0.01em;
   color: #373745;
+  margin-left: 0.75em;
 }
 
 .percent {
@@ -120,6 +121,7 @@ export default {
   font-size: 0.875em;
   letter-spacing: 0.0156em;
   color: #898993;
+  margin-left: 3em;
 }
 
 .gameGrid {
@@ -139,5 +141,47 @@ export default {
 .usersChat {
   height: 80%;
   width: 25%;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: auto;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 1600px) {
+  .Popup {
+    top: 25%;
+    width: 25%;
+  }
+
+  .playersTable {
+    height: 30%;
+    width: 20%;
+  }
+
+  .row {
+    margin-bottom: 5%;
+  }
+
+  .playerName {
+    text-align: left;
+    font-size: 1.1em;
+  }
+
+  .percent {
+    margin-left: 2.75em;
+  }
+}
+
+@media screen and (max-width: 1336px) {
+
 }
 </style>

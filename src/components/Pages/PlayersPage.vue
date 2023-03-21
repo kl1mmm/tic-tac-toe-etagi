@@ -2,14 +2,14 @@
   <div class="wrapper">
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
-        <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
-                 v-if="isPopupVisible"></MyPopUp>
+      <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
+               v-if="isPopupVisible"></MyPopUp>
       <div class="block">
         <div class="top-of-table">
           <div class="table-naming">
             Список игроков
           </div>
-          <MyButton @click="showPopupInfo()" @closePopup="closePopupInfo()">Добавить игрока</MyButton>
+          <MyButton class="btnAddPlayer" @click="showPopupInfo()" @closePopup="closePopupInfo()">Добавить игрока</MyButton>
         </div>
         <div class="table">
           <MySpreadsheet class="spreadSheet">
@@ -149,7 +149,7 @@ export default {
 
 .block {
   background: #ffffff;
-  width: 48.5%;
+  width: 65%;
   height: 90%;
   box-shadow: 0 4px 20px rgba(44, 57, 121, 0.09);
   border-radius: 40px;
@@ -193,5 +193,33 @@ tr {
   top: 35%;
   left: 37.5%;
   width: 20%;
+}
+
+@media screen and (max-width: 1600px) {
+  .block {
+    width: 75%;
+  }
+
+  .Popup {
+    top: 25%;
+    left: 32.5%;
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1336px) {
+  .block {
+    width: 85%;
+  }
+
+  .table-naming {
+    font-size: 1.3em;
+  }
+
+  .Popup {
+    top: 25%;
+    left: 32.5%;
+    width: 30%;
+  }
 }
 </style>
