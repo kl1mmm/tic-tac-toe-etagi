@@ -178,7 +178,30 @@ export default {
 .statusText {
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 1em;
   line-height: 1.5em;
+}
+
+@media screen and (max-width: 1600px) {
+  .timer {
+    width: 6.5em;
+    height: 3em;
+  }
+
+  .status {
+    width: 16em;
+    height: 2.25em;
+  }
+
+  .statusText {
+    font-size: 0.8em;
+  }
+
+  .turnImg {
+    height: 1.15em;
+    width: 1.15em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
 }
 </style>

@@ -1,7 +1,7 @@
 <template v-model="markOfCell">
   <button ref="btn" class="default" v-on:click="Step(this.activePlayer)">
-    <img alt="X" ref="cross" class="cross" width="185" height="197" src="@/components/UI/pics/cross.svg">
-    <img alt="O" ref="zero" class="zero" width="185" height="197" src="@/components/UI/pics/zero.svg">
+    <img alt="X" ref="cross" class="cross" src="@/components/UI/pics/cross.svg">
+    <img alt="O" ref="zero" class="zero" src="@/components/UI/pics/zero.svg">
   </button>
 </template>
 
@@ -55,6 +55,11 @@ export default {
   margin: auto;
 }
 
+.cross, .zero {
+  width: 100%;
+  height: 100%;
+}
+
 .winCross, .winCross:hover {
   background: #CFEDE6;
 }
@@ -63,4 +68,17 @@ export default {
   background: #F3BBD0;
 }
 
+@media screen and (max-width: 1600px) {
+  .default {
+    width: 10.5em;
+    height: 10.5em;
+  }
+}
+
+@media screen and (max-width: 1336px) {
+  .default {
+    width: 10em;
+    height: 10em;
+  }
+}
 </style>

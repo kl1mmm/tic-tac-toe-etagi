@@ -59,4 +59,14 @@ export default {
   color: #373745;
   align-self: center;
 }
+
+@media screen and (max-width: 1600px) {
+  .time {
+    font-size: 1.7em;
+  }
+
+  #clock {
+    padding: 0.25%;
+  }
+}
 </style>

@@ -80,7 +80,7 @@ export default {
 }
 
 .message {
-  width: 85%;
+  width: 92.5%;
   margin: auto 0.75em 0.75em 0;
   padding: 0.75em;
 }

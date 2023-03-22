@@ -133,7 +133,7 @@ export default {
 .Popup {
   padding: 1.5em;
   position: fixed;
-  top: 35%;
+  top: 30%;
   left: 39%;
   width: 17.5%;
 }
@@ -159,6 +159,7 @@ export default {
 @media screen and (max-width: 1600px) {
   .Popup {
     top: 25%;
+    left: 37%;
     width: 25%;
   }
 
@@ -179,9 +180,16 @@ export default {
   .percent {
     margin-left: 2.75em;
   }
-}
 
-@media screen and (max-width: 1336px) {
+  .gameGrid {
+    width: 40%;
+    height: 95%;
+    margin: 1% auto;
+  }
 
+  .usersChat {
+    height: 98%;
+    width: 25%;
+  }
 }
 </style>
