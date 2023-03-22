@@ -101,6 +101,10 @@ export default {
   margin-bottom: 4%;
 }
 
+.row {
+   margin-bottom: 3%;
+}
+
 .imgTeam {
   width: 1.5em;
   height: 1.5em;
@@ -110,6 +114,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   font-size: 1.25em;
+  text-align: left;
   letter-spacing: 0.01em;
   color: #373745;
   margin-left: 0.75em;
@@ -125,8 +130,8 @@ export default {
 }
 
 .gameGrid {
-  width: 30%;
-  height: 80%;
+  width: 40%;
+  height: 85%;
   margin: 2% auto;
 }
 
@@ -139,7 +144,7 @@ export default {
 }
 
 .usersChat {
-  height: 80%;
+  height: 89%;
   width: 25%;
 }
 
@@ -154,6 +159,14 @@ export default {
 .column {
   display: flex;
   flex-direction: row;
+}
+
+@media screen and (min-width: 1600px) {
+  .Popup {
+    top: 30%;
+    left: 37%;
+    width: 25%;
+  }
 }
 
 @media screen and (max-width: 1600px) {

@@ -42,11 +42,11 @@
               <td class="row">{{ player.DateOfCreate }}</td>
               <td class="row">{{ player.DateOfEdit }}</td>
               <td class="row">
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Активен'"
+                <MyButton class="Secondary MSmall btnBlock" v-if="player.Status === 'Активен'"
                           @click="player.Status = 'Заблокирован'">
                   <img alt="Ø" class="blockImg" src="@/components/UI/pics/Stop.svg"> Заблокировать
                 </MyButton>
-                <MyButton class="Secondary MSmall" v-if="player.Status === 'Заблокирован'"
+                <MyButton class="Secondary MSmall btnBlock" v-if="player.Status === 'Заблокирован'"
                           @click="player.Status = 'Активен'">
                   Разблокировать
                 </MyButton>
@@ -168,6 +168,13 @@ export default {
   font-weight: 700;
   font-size: 1.5em;
   text-align: left;
+}
+
+.btnBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 11em;
 }
 
 td, th {
