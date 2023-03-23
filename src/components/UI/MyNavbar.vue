@@ -27,6 +27,32 @@
       <MyIconButton @click="$router.push('/')" class="ExitBtn"></MyIconButton>
     </div>
   </header>
+  <nav>
+    <div class="navbarPhone">
+      <div class="container nav-container">
+        <input class="checkbox" type="checkbox" name="" id=""/>
+        <div class="hamburger-lines">
+          <span class="line line1"></span>
+          <span class="line line2"></span>
+          <span class="line line3"></span>
+        </div>
+        <div class="logo">
+          <img src="@/components/UI/pics/logo.svg" alt="XOXO" style="width: 72px; height: 16px;">
+        </div>
+        <div class="menu-items">
+          <li><a @click="$router.push('/game/')" href="#">Игровое поле</a></li>
+          <li><a @click="$router.push('/rating/')" href="#">Рейтинг</a></li>
+          <li><a @click="$router.push('/sessions/')" href="#">Активные игроки</a></li>
+          <li><a @click="$router.push('/history/')" href="#">История игр</a></li>
+          <li><a @click="$router.push('/players-list/')" href="#">Список игроков</a></li>
+          <li><a class="item-leave" @click="$router.push('/')" href="#">Выйти
+            <MyIconButton class="phoneExitBtn"></MyIconButton>
+          </a>
+          </li>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script>
@@ -39,6 +65,10 @@ export default {
 </script>
 
 <style scoped>
+.navbarPhone {
+  display: none;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -66,6 +96,172 @@ export default {
 
 .h-center a {
   margin-left: 2.5em;
+}
+
+@media screen and (max-width: 905px) {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .container {
+    max-width: 905px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .navbarPhone {
+    display: block;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 62px;
+  }
+
+  .navbarPhone .menu-items {
+    display: flex;
+  }
+
+  .navbarPhone .nav-container li {
+    list-style: none;
+  }
+
+  .navbarPhone .nav-container a {
+    text-decoration: none;
+    color: #0e2431;
+    font-weight: 700;
+    font-size: 0.9em;
+    font-style: normal;
+    padding: 0.7rem;
+  }
+
+  .menu-items .item-leave {
+    display: flex;
+    align-content: center;
+  }
+
+  .phoneExitBtn {
+    margin-left: 5%;
+  }
+
+  .navbarPhone.nav-container a:hover {
+    font-weight: bolder;
+  }
+
+  .nav-container {
+    display: block;
+    position: relative;
+    height: 60px;
+  }
+
+  .nav-container .checkbox {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 32px;
+    top: 20px;
+    right: 20px;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .nav-container .hamburger-lines {
+    height: 26px;
+    width: 32px;
+    position: absolute;
+    top: 17px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .nav-container .hamburger-lines .line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #0e2431;
+  }
+
+  .nav-container .hamburger-lines .line1 {
+    transform-origin: 0 0;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .nav-container .hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .nav-container .hamburger-lines .line3 {
+    transform-origin: 0 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .navbarPhone .menu-items {
+    padding-top: 85px;
+    width: 100%;
+    transform: translateY(-150%);
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    transition: transform 0.5s ease-in-out;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .navbarPhone .menu-items li {
+    margin-bottom: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .logo {
+    position: absolute;
+    top: 30%;
+    left: 1.2em;
+    font-size: 1.2rem;
+    color: #0e2431;
+  }
+
+  .nav-container input[type="checkbox"]:checked ~ .menu-items {
+    transform: translateX(0);
+  }
+
+  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+    transform: rotate(45deg);
+  }
+
+  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+    transform: scaleY(0);
+  }
+
+  .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+    transform: rotate(-45deg);
+  }
+
+  .nav-container input[type="checkbox"]:checked ~ .logo {
+    transition: opacity 1s;
+    opacity: 0;
+  }
 }
 
 </style>

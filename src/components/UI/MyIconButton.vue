@@ -25,7 +25,11 @@ button svg {
   fill: #373745;
 }
 
-button:hover svg {
+.ExitBtn:hover svg {
   fill: #3BA189;
+}
+
+.phoneExitBtn:hover svg {
+  fill: #373745;
 }
 </style>
