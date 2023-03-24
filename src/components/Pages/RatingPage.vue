@@ -19,7 +19,8 @@
             </thead>
             <tbody v-for="player in playersData" :key="player.ID">
             <tr>
-              <td class="row">{{ player.PlayerName }}</td>
+              <td class="row namingPC">{{ player.PlayerName }}</td>
+              <td class="row namingPhone" style="padding-right: 1em;">{{ player.PlayerName.slice(0, player.PlayerName.lastIndexOf(' ')) }}<br>{{ player.PlayerName.slice(player.PlayerName.lastIndexOf(' '), player.PlayerName.length) }}</td>
               <td class="row">{{ player.Games }}</td>
               <td class="row" style="color: #69B849;">{{ player.Wins }}</td>
               <td class="row" style="color: #E93E3E;">{{ player.Loses }}</td>
@@ -92,6 +93,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .screen {
@@ -117,6 +119,10 @@ export default {
   line-height: 150%;
   margin-top: 4%;
   text-align: left;
+}
+
+.namingPhone {
+  display: none;
 }
 
 td, th {
@@ -149,6 +155,39 @@ tr {
 
   .table-naming {
     font-size: 1.35em;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  MyNavbar {
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .block {
+    width: 100%;
+    height: 98%;
+    box-shadow: none;
+    border-radius: 0;
+    margin-left: 1.75em;
+  }
+
+  .spreadSheet {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th {
+    padding-right: 1em;
+  }
+
+  .namingPC {
+    display: none;
+  }
+
+  .namingPhone {
+    display: block;
   }
 }
 </style>
