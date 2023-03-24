@@ -115,4 +115,12 @@ export default {
   text-align: left;
   display: none;
 }
+
+@media screen and (max-width: 770px) {
+  .block {
+    box-shadow: none;
+  }
+
+  .screen {overflow: hidden}
+}
 </style>

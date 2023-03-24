@@ -11,24 +11,26 @@
             <thead>
             <tr>
               <th class="row">Игроки</th>
-              <th class="row"></th>
+              <th class="row phoneDel"></th>
               <th class="row">Дата</th>
               <th class="row">Время игры</th>
             </tr>
             </thead>
             <tbody v-for="game in gamesData" :key="game.ID">
             <tr>
-              <td class="row"><img alt="0" class="gameImg"
-                                   src="@/components/UI/pics/ZeroPlayer1.svg">{{ game.Player1Name }}
-                <img class="winner" alt="Победитель"
-                     src="@/components/UI/pics/GameWinner.svg" v-if="game.Winner === game.Player1Name">
-              </td>
-              <div class="versus row">против</div>
-              <td class="row"><img alt="X" class="gameImg"
-                                   src="@/components/UI/pics/CrossPlayer2.svg">{{ game.Player2Name }}
-                <img class="winner" alt="Победитель"
-                     src="@/components/UI/pics/GameWinner.svg" v-if="game.Winner === game.Player2Name">
-              </td>
+              <div class="phoneColumn">
+                <td class="row"><img alt="0" class="gameImg"
+                                     src="@/components/UI/pics/ZeroPlayer1.svg">{{ game.Player1Name }}
+                  <img class="winner" alt="Победитель"
+                       src="@/components/UI/pics/GameWinner.svg" v-if="game.Winner === game.Player1Name">
+                </td>
+                <div class="versus row phoneDel">против</div>
+                <td class="row"><img alt="X" class="gameImg"
+                                     src="@/components/UI/pics/CrossPlayer2.svg">{{ game.Player2Name }}
+                  <img class="winner" alt="Победитель"
+                       src="@/components/UI/pics/GameWinner.svg" v-if="game.Winner === game.Player2Name">
+                </td>
+              </div>
               <td class="row">{{ game.Date }}</td>
               <td class="row">{{ game.Time }}</td>
             </tr>
@@ -148,6 +150,45 @@ tr {
 
   .table-naming {
     font-size: 1.35em;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  .block {
+    width: 100%;
+    height: 95%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  MyNavbar {
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .phoneDel {
+    display: none;
+  }
+
+  .phoneColumn {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gameImg {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .winner {
+    width: 1em;
+    height: 1em;
+  }
+
+  .table-naming {
+    font-size: 1.25em;
   }
 }
 </style>

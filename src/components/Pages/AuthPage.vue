@@ -22,6 +22,5 @@ export default {
 
 .auth {
   flex-direction: column;
-
 }
 </style>

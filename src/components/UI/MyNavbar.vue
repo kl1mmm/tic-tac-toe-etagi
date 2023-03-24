@@ -127,7 +127,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 62px;
+    height: 50px;
   }
 
   .navbarPhone .menu-items {
@@ -163,7 +163,7 @@ export default {
   .nav-container {
     display: block;
     position: relative;
-    height: 60px;
+    height: 50px;
   }
 
   .nav-container .checkbox {
@@ -171,7 +171,7 @@ export default {
     display: block;
     height: 32px;
     width: 32px;
-    top: 20px;
+    top: 15px;
     right: 20px;
     z-index: 5;
     opacity: 0;
@@ -182,7 +182,7 @@ export default {
     height: 26px;
     width: 32px;
     position: absolute;
-    top: 17px;
+    top: 12px;
     right: 20px;
     z-index: 2;
     display: flex;
@@ -213,7 +213,7 @@ export default {
   }
 
   .navbarPhone .menu-items {
-    padding-top: 85px;
+    padding-top: 60px;
     width: 100%;
     transform: translateY(-150%);
     display: flex;
@@ -236,7 +236,7 @@ export default {
 
   .logo {
     position: absolute;
-    top: 30%;
+    top: 28%;
     left: 1.2em;
     font-size: 1.2rem;
     color: #0e2431;

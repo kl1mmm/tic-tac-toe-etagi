@@ -35,7 +35,7 @@
               <td class="row">
                 <MyStatus class="M"
                           :class="{'Free': player.Status==='Активен', 'Blocked': player.Status ==='Заблокирован'}"
-                          style="width: 70%; padding: 0.25em 0.75em">
+                          style="width: 90%; padding: 0.15em 0.2em; margin-right: 2em; text-align: center">
                   {{ player.Status }}
                 </MyStatus>
               </td>
@@ -138,6 +138,7 @@ export default {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .screen {
@@ -227,6 +228,43 @@ tr {
     top: 25%;
     left: 32.5%;
     width: 30%;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  MyNavbar {
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .block {
+    width: 100%;
+    height: 98%;
+    box-shadow: none;
+    border-radius: 0;
+    margin-left: 1.75em;
+  }
+
+  .top-of-table {
+    margin-right: 1.75em;
+  }
+
+  .spreadSheet {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .Popup {
+    top: 12.5%;
+    left: 20%;
+    width: 50%;
+  }
+
+  .btnAddPlayer {
+    height: 2.75em;
+    display: flex;
+    align-items: center;
   }
 }
 </style>
