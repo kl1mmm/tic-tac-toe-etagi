@@ -9,7 +9,8 @@
           <div class="table-naming">
             Список игроков
           </div>
-          <MyButton class="btnAddPlayer" @click="showPopupInfo()" @closePopup="closePopupInfo()">Добавить игрока</MyButton>
+          <MyButton class="btnAddPlayer" @click="showPopupInfo()" @closePopup="closePopupInfo()">Добавить игрока
+          </MyButton>
         </div>
         <div class="table">
           <MySpreadsheet class="spreadSheet">

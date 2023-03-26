@@ -243,7 +243,7 @@ export default {
   }
 
   .nav-container input[type="checkbox"]:checked ~ .menu-items {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   .nav-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {

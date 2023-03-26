@@ -4,8 +4,17 @@
     <div class="screen">
       <MyModal class="Popup" :winner="winner" :gameStatus="Status" v-if="isModalVisible"></MyModal>
       <div class="playersTable">
-        <div class="tableName">Игроки</div>
-        <MySpreadsheet>
+        <div class="topOfTable">
+          <div class="tableName">Игроки</div>
+          <div class="clickTop">
+            <input class="checkbox" type="checkbox" @click="this.$refs.arr.classList.toggle('open');" name="" id=""/>
+            <a class="arrow-icon" ref="arr" @click="this.$refs.arr.classList.toggle('open');">
+              <span class="left-bar"></span>
+              <span class="right-bar"></span>
+            </a>
+          </div>
+        </div>
+        <MySpreadsheet class="menu-items">
           <tbody>
           <tr v-for="player in playersData" :key="player.ID">
             <div class="row">
@@ -102,7 +111,7 @@ export default {
 }
 
 .row {
-   margin-bottom: 3%;
+  margin-bottom: 3%;
 }
 
 .imgTeam {
@@ -161,6 +170,10 @@ export default {
   flex-direction: row;
 }
 
+.arrow-icon, .checkbox {
+  display: none;
+}
+
 @media screen and (min-width: 1600px) {
   .Popup {
     top: 30%;
@@ -203,6 +216,129 @@ export default {
   .usersChat {
     height: 98%;
     width: 25%;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  .screen {
+    flex-direction: column;
+  }
+
+  .wrapper {
+    background: #E5E5E5;
+  }
+
+  .topOfTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    margin: 1em 0.85em 0 0.85em;
+  }
+
+  .clickTop {
+    position: relative;
+    margin-right: 1.75em;
+  }
+
+  .row {
+    margin-bottom: 2%;
+    margin-left: 0.7em;
+  }
+
+  .playersTable {
+    width: 90%;
+  }
+
+  menu-items {
+    display: flex;
+    transform: translateY(0);
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .playersTable input[type="checkbox"]:checked ~ .menu-items {
+    transform: translateY(0);
+  }
+
+  .arrow-icon {
+    height: 1em;
+    width: 1em;
+    display: block;
+    padding: 0.5em;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+
+  .checkbox {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    height: 1em;
+    width: 1em;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .left-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    right: 9px;
+    width: 13px;
+    height: 3px;
+    display: block;
+    transform: rotate(35deg);
+    float: right;
+    border-radius: 2px;
+  }
+
+  .left-bar:after {
+    content: "";
+    background-color: black;
+    width: 13px;
+    height: 3px;
+    display: block;
+    float: right;
+    border-radius: 6px 10px 10px 6px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+  }
+
+  .right-bar {
+    position: absolute;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    width: 13px;
+    height: 3px;
+    display: block;
+    transform: rotate(-35deg);
+    float: right;
+    border-radius: 2px;
+  }
+
+  .right-bar:after {
+    content: "";
+    background-color: black;
+    width: 13px;
+    height: 3px;
+    display: block;
+    float: right;
+    border-radius: 10px 6px 6px 10px;
+    transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+    z-index: -1;
+  }
+
+  .open .left-bar:after {
+    transform-origin: center center;
+    transform: rotate(-70deg);
+  }
+
+  .open .right-bar:after {
+    transform-origin: center center;
+    transform: rotate(70deg);
   }
 }
 </style>

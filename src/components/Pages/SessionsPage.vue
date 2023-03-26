@@ -9,16 +9,15 @@
         <div class="table">
           <MySpreadsheet>
             <tbody class="sessionsList" v-for="player in playersData" :key="player.ID">
-            <tr>
-              <td>{{ player.PlayerName }}</td>
+            <tr class="row">
+              <td class="nameOfPlayers">{{ player.PlayerName }}</td>
               <td>
                 <MyStatus class="S" style="padding: 0.25em 0.75em">
                   {{ player.Status }}
                 </MyStatus>
               </td>
               <td>
-                <MyButton class="MSmall" :disabled="player.Status !== 'Свободен'">Позвать играть
-                </MyButton>
+                <MyButton class="MSmall" :disabled="player.Status !== 'Свободен'">Позвать играть</MyButton>
               </td>
             </tr>
             </tbody>
@@ -120,6 +119,10 @@ td:nth-child(3) {
   text-align: center;
 }
 
+.nameOfPlayers {
+  font-size: 1em;
+}
+
 @media screen and (max-width: 1600px) {
   .block {
     width: 70%;
@@ -133,6 +136,39 @@ td:nth-child(3) {
 
   .table-naming {
     font-size: 1.35em;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  .block {
+    width: 100%;
+    height: 95%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  MyNavbar {
+    box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
+    border-radius: 0 0 16px 16px;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .table-naming {
+    font-size: 1.25em;
+  }
+
+  .MSmall {
+    width: 7em;
+    height: 3em;
+    display: flex;
+    align-items: center;
+    margin-left: 1em;
+    margin-right: 0.5em;
+  }
+
+  .nameOfPlayers {
+    font-size: 0.95em;
   }
 }
 </style>

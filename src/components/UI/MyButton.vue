@@ -71,4 +71,15 @@ button:disabled {
   line-height: 20px;
   letter-spacing: 0.25px;
 }
+
+@media screen and (max-width: 770px) {
+  .MSmall {
+    padding: 8px 16px;
+    gap: 8px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
 </style>
