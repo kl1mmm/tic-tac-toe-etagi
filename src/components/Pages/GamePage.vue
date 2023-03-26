@@ -3,12 +3,12 @@
     <MyNavbar style="width: 100%;"></MyNavbar>
     <div class="screen">
       <MyModal class="Popup" :winner="winner" :gameStatus="Status" v-if="isModalVisible"></MyModal>
-      <div class="playersTable">
+      <div class="playersTable" ref="table">
         <div class="topOfTable">
           <div class="tableName">Игроки</div>
           <div class="clickTop">
-            <input class="checkbox" type="checkbox" @click="this.$refs.arr.classList.toggle('open');" name="" id=""/>
-            <a class="arrow-icon" ref="arr" @click="this.$refs.arr.classList.toggle('open');">
+            <input class="checkbox" type="checkbox" @click="openTable" name="" id=""/>
+            <a class="arrow-icon" ref="arr" @click="openTable">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
             </a>
@@ -74,6 +74,10 @@ export default {
       }
       console.log(this.winner);
       this.isModalVisible = true;
+    },
+    openTable() {
+      this.$refs.arr.classList.toggle('open');
+      this.$refs.table.classList.toggle('open');
     }
   }
 }
@@ -226,6 +230,7 @@ export default {
 
   .wrapper {
     background: #E5E5E5;
+    height: 100%;
   }
 
   .topOfTable {
@@ -244,20 +249,6 @@ export default {
   .row {
     margin-bottom: 2%;
     margin-left: 0.7em;
-  }
-
-  .playersTable {
-    width: 90%;
-  }
-
-  menu-items {
-    display: flex;
-    transform: translateY(0);
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .playersTable input[type="checkbox"]:checked ~ .menu-items {
-    transform: translateY(0);
   }
 
   .arrow-icon {
@@ -280,6 +271,8 @@ export default {
     cursor: pointer;
     opacity: 0;
   }
+
+
 
   .left-bar {
     position: absolute;
@@ -339,6 +332,18 @@ export default {
   .open .right-bar:after {
     transform-origin: center center;
     transform: rotate(70deg);
+  }
+
+  .playersTable {
+    height: 70px;
+    width: 90%;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .open {
+    height: 100%;
+    transform: translateY(0);
   }
 }
 </style>
