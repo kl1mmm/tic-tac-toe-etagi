@@ -338,12 +338,12 @@ export default {
     height: 70px;
     width: 90%;
     overflow: hidden;
-    transition: transform 0.5s ease-in-out;
   }
 
   .open {
     height: 100%;
     transform: translateY(0);
+    transition: transform 0.5s ease-in-out;
   }
 }
 </style>
