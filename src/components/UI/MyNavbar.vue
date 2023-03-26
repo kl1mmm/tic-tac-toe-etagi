@@ -121,6 +121,10 @@ export default {
     background: #FFFFFF;
     box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
     border-radius: 0 0 16px 16px;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 
   .nav-container {

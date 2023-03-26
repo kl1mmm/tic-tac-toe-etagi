@@ -1,35 +1,38 @@
 <template>
   <div class="wrapper">
-    <MyNavbar style="width: 100%;"></MyNavbar>
+    <MyNavbar></MyNavbar>
     <div class="screen">
       <MyModal class="Popup" :winner="winner" :gameStatus="Status" v-if="isModalVisible"></MyModal>
-      <div class="playersTable" ref="table">
+      <div class="playersTable">
         <div class="topOfTable">
           <div class="tableName">Игроки</div>
           <div class="clickTop">
-            <input class="checkbox" type="checkbox" @click="openTable" name="" id=""/>
-            <a class="arrow-icon" ref="arr" @click="openTable">
+            <input class="checkbox" type="checkbox" @click="toggleOpen" name="" id=""/>
+            <a class="arrow-icon" ref="arr" @click="toggleOpen">
               <span class="left-bar"></span>
               <span class="right-bar"></span>
             </a>
           </div>
         </div>
-        <MySpreadsheet class="menu-items">
-          <tbody>
-          <tr v-for="player in playersData" :key="player.ID">
-            <div class="row">
-              <div class="column">
-                <td><img alt="O" class="imgTeam" src="@/components/UI/pics/ZeroPlayer1.svg"
-                         v-if="player.Team === 'Zero'">
-                  <img alt="X" class="imgTeam" src="@/components/UI/pics/CrossPlayer2.svg"
-                       v-if="player.Team === 'Cross'"></td>
-                <td class="playerName">{{ player.PlayerName }}</td>
+        <div class="menu-items-wrapper">
+          <MySpreadsheet class="menu-items">
+            <tbody>
+            <tr v-for="player in playersData" :key="player.ID">
+              <div class="row">
+                <div class="column">
+                  <td><img alt="O" class="imgTeam" src="@/components/UI/pics/ZeroPlayer1.svg"
+                           v-if="player.Team === 'Zero'">
+                    <img alt="X" class="imgTeam" src="@/components/UI/pics/CrossPlayer2.svg"
+                         v-if="player.Team === 'Cross'"></td>
+                  <td class="playerName">{{ player.PlayerName }}</td>
+                </div>
+                <td class="percent">{{ player.PercentOfWins }} побед</td>
               </div>
-              <td class="percent">{{ player.PercentOfWins }} побед</td>
-            </div>
-          </tr>
-          </tbody>
-        </MySpreadsheet>
+            </tr>
+            </tbody>
+          </MySpreadsheet>
+        </div>
+
       </div>
       <MyGrid :playersInfo="this.playersData" :inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
       <MyChat :playersInfo="this.playersData" class="usersChat"></MyChat>
@@ -75,9 +78,10 @@ export default {
       console.log(this.winner);
       this.isModalVisible = true;
     },
-    openTable() {
-      this.$refs.arr.classList.toggle('open');
-      this.$refs.table.classList.toggle('open');
+    toggleOpen() {
+      this.$refs.arr.classList.toggle('open-arrow');
+      document.querySelector('.menu-items-wrapper').classList.toggle('open')
+
     }
   }
 }
@@ -85,7 +89,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -98,11 +102,14 @@ export default {
 
 .playersTable {
   background: #ffffff;
+  position: relative;
   box-shadow: 0 4px 20px rgba(44, 57, 121, 0.09);
   border-radius: 1.25em;
   padding: 1% 1% 0 1%;
   margin: 2%;
-  height: 25%;
+  overflow: hidden;
+  min-height: 70px;
+  transition: all 0.9s ease;
 }
 
 .tableName {
@@ -111,7 +118,6 @@ export default {
   font-size: 1.5em;
   color: #373745;
   text-align: left;
-  margin-bottom: 4%;
 }
 
 .row {
@@ -194,7 +200,6 @@ export default {
   }
 
   .playersTable {
-    height: 30%;
     width: 20%;
   }
 
@@ -230,25 +235,51 @@ export default {
 
   .wrapper {
     background: #E5E5E5;
-    height: 100%;
+  }
+
+  MyNavbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 
   .topOfTable {
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
-    margin: 1em 0.85em 0 0.85em;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    padding: 10px;
+    align-items: center;
+    z-index: 3;
+  }
+
+  .tableName {
+    margin-left: 0.5em;
   }
 
   .clickTop {
+    width: 20px;
+    height: 20px;
     position: relative;
-    margin-right: 1.75em;
+    margin-right: 2em;
   }
 
   .row {
     margin-bottom: 2%;
     margin-left: 0.7em;
+  }
+
+  .playersTable {
+    width: 90%;
+    z-index: 1;
   }
 
   .arrow-icon {
@@ -271,8 +302,6 @@ export default {
     cursor: pointer;
     opacity: 0;
   }
-
-
 
   .left-bar {
     position: absolute;
@@ -324,26 +353,25 @@ export default {
     z-index: -1;
   }
 
-  .open .left-bar:after {
+  .open-arrow .left-bar:after {
     transform-origin: center center;
     transform: rotate(-70deg);
   }
 
-  .open .right-bar:after {
+  .open-arrow .right-bar:after {
     transform-origin: center center;
     transform: rotate(70deg);
   }
 
-  .playersTable {
-    height: 70px;
-    width: 90%;
-    overflow: hidden;
+
+  .menu-items-wrapper {
+    margin-top: -100%;
+    transition: all 1s ease;
+
   }
 
   .open {
-    height: 100%;
-    transform: translateY(0);
-    transition: transform 0.5s ease-in-out;
+    margin-top: 70px;
   }
 }
 </style>
