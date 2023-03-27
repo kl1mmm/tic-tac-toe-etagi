@@ -280,6 +280,7 @@ export default {
   .playersTable {
     width: 90%;
     z-index: 1;
+    align-self: center;
   }
 
   .arrow-icon {
@@ -367,11 +368,40 @@ export default {
   .menu-items-wrapper {
     margin-top: -100%;
     transition: all 1s ease;
+  }
 
+  .gameGrid {
+    width: 100%;
+    height: 100%;
+    margin: 1% auto;
+  }
+
+  .Popup {
+    top: 25%;
+    left: 22.5%;
+    width: 50%;
   }
 
   .open {
     margin-top: 70px;
+  }
+
+  @media screen and (max-width: 455px) {
+    .tableName {
+      font-size: 1.3em;
+    }
+
+    .playersTable {
+      padding: 0;
+    }
+
+    .topOfTable {
+      height: 45px;
+    }
+
+    .open {
+      margin-top: 70px;
+    }
   }
 }
 </style>

@@ -1,6 +1,19 @@
 <template>
   <div class="gameBlock">
     <MyTimer class="timer" ref="timer"></MyTimer>
+    <MyStatus class="TurnSide status phone">
+      <div class="statusText">Ходит</div>
+      <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
+           src="@/components/UI/pics/ZeroPlayer1.svg">
+      <img ref="turnImg" class="turnImg" alt="X" v-if="this.activePlayer==='O'"
+           src="@/components/UI/pics/CrossPlayer2.svg">
+      <div class="statusText" v-if="this.activePlayer==='X'">
+        {{ this.playersInfo[0].PlayerName.slice(0, this.playersInfo[0].PlayerName.lastIndexOf(' ')) }}
+      </div>
+      <div class="statusText" v-if="this.activePlayer==='O'">
+        {{ this.playersInfo[1].PlayerName.slice(0, this.playersInfo[1].PlayerName.lastIndexOf(' ')) }}
+      </div>
+    </MyStatus>
     <table class="grid">
       <tbody>
       <tr>
@@ -38,7 +51,7 @@
       </tr>
       </tbody>
     </table>
-    <MyStatus class="TurnSide status">
+    <MyStatus class="TurnSide status desktop">
       <div class="statusText">Ходит</div>
       <img ref="turnImg" class="turnImg" alt="O" v-if="this.activePlayer==='X'"
            src="@/components/UI/pics/ZeroPlayer1.svg">
@@ -152,6 +165,14 @@ export default {
   justify-content: space-between;
 }
 
+.phone {
+  display: none;
+}
+
+.desktop {
+  display: flex;
+}
+
 .grid {
   margin: 0 auto;
 }
@@ -202,6 +223,20 @@ export default {
     width: 1.15em;
     margin-left: 0.5em;
     margin-right: 0.5em;
+  }
+
+  @media screen and (max-width: 905px) {
+    .desktop {
+      display: none;
+    }
+
+    .phone {
+      display: flex;
+    }
+
+    .gameBlock {
+
+    }
   }
 }
 </style>
