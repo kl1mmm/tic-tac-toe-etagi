@@ -100,8 +100,6 @@ export default {
 
 <style scoped>
 .chat {
-    position: fixed;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -113,6 +111,7 @@ export default {
 .PC {
     display: flex;
     width: 25%;
+    align-self: flex-end;
 }
 
 .phone {
@@ -165,6 +164,11 @@ export default {
 @media screen and (max-width: 905px) {
     .PC {
         display: none;
+    }
+
+    .chat {
+        position: fixed;
+        bottom: 0;
     }
 
     .messagesArr {
