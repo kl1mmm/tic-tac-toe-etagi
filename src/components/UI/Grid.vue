@@ -233,10 +233,6 @@ export default {
     .phone {
       display: flex;
     }
-
-    .gameBlock {
-
-    }
   }
 }
 </style>

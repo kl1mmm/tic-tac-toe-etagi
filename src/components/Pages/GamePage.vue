@@ -14,7 +14,7 @@
             </a>
           </div>
         </div>
-        <div class="menu-items-wrapper">
+        <div class="menu-items-wrapper" ref="menu">
           <MySpreadsheet class="menu-items">
             <tbody>
             <tr v-for="player in playersData" :key="player.ID">
@@ -32,7 +32,6 @@
             </tbody>
           </MySpreadsheet>
         </div>
-
       </div>
       <MyGrid :playersInfo="this.playersData" :inGameStatus="Status" @gameEnd="gameEnd" class="gameGrid"></MyGrid>
       <MyChat :playersInfo="this.playersData" class="usersChat"></MyChat>
@@ -80,8 +79,7 @@ export default {
     },
     toggleOpen() {
       this.$refs.arr.classList.toggle('open-arrow');
-      document.querySelector('.menu-items-wrapper').classList.toggle('open')
-
+      this.$refs.menu.classList.toggle('open');
     }
   }
 }
@@ -89,7 +87,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -109,7 +107,8 @@ export default {
   margin: 2%;
   overflow: hidden;
   min-height: 70px;
-  transition: all 0.9s ease;
+  max-height: 250px;
+  transition: all 0.9s ease-out;
 }
 
 .tableName {
@@ -118,6 +117,7 @@ export default {
   font-size: 1.5em;
   color: #373745;
   text-align: left;
+  margin-bottom: 5%;
 }
 
 .row {
@@ -234,6 +234,7 @@ export default {
   }
 
   .wrapper {
+    height: 100%;
     background: #E5E5E5;
   }
 
@@ -263,6 +264,7 @@ export default {
 
   .tableName {
     margin-left: 0.5em;
+    margin-top: 5%;
   }
 
   .clickTop {
@@ -386,6 +388,12 @@ export default {
     margin-top: 70px;
   }
 
+  .usersChat {
+    align-self: center;
+    width: 95%;
+  }
+}
+
   @media screen and (max-width: 455px) {
     .tableName {
       font-size: 1.3em;
@@ -399,9 +407,12 @@ export default {
       height: 45px;
     }
 
+    .usersChat {
+      width: 100%;
+    }
+
     .open {
       margin-top: 70px;
     }
   }
-}
 </style>
