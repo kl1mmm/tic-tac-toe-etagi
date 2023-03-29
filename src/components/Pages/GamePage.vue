@@ -235,7 +235,6 @@ export default {
 
   .wrapper {
     height: 100%;
-    background: #E5E5E5;
   }
 
   MyNavbar {

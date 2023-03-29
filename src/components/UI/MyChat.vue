@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="chat phone">
-    <div class="messagesArr" ref="phoneChat" id="phC">
+    <div class="messagesArr" ref="phoneChat">
       <div class="sendMsg">
         <InputText id="inp" class="msgInp" placeholder="Сообщение..." :value="msgText"
                    @input="msgText = $event.target.value" @click="openPhoneChat"></InputText>
@@ -98,6 +98,8 @@ export default {
 
 <style scoped>
 .chat {
+  position: fixed;
+  bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -168,7 +170,7 @@ export default {
     align-self: center;
     width: 85%;
     height: 100%;
-    max-height: 450px;
+    max-height: 400px;
     background: rgba(255, 255, 255, 1);
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -10px 20px 0 rgba(44, 57, 121, 0.1);
