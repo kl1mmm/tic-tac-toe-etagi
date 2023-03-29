@@ -195,7 +195,7 @@ export default {
     }
 
     .phone .message {
-        max-height: 0px;
+        max-height: 0;
         height: 100%;
         padding: 0;
         overflow-y: scroll;
