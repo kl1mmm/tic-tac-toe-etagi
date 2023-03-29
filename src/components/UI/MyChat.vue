@@ -17,18 +17,20 @@
       </MyButton>
     </div>
   </div>
-  <div class="chat phone">
+  <div class="chat phone" v-click-away="closePhoneChat">
     <div class="messagesArr" ref="phoneChat">
-      <div class="sendMsg">
-        <InputText id="inp" class="msgInp" placeholder="Сообщение..." :value="msgText"
-                   @input="msgText = $event.target.value" @click="openPhoneChat"></InputText>
-        <MyButton class="arriveImg" @click="sendMsg()">
-          <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M1.4 17.4L18.85 9.92C19.66 9.57 19.66 8.43 18.85 8.08L1.4 0.600002C0.74 0.310002 0.00999999 0.800002 0.00999999 1.51L0 6.12C0 6.62 0.37 7.05 0.87 7.11L15 9L0.87 10.88C0.37 10.95 0 11.38 0 11.88L0.00999999 16.49C0.00999999 17.2 0.74 17.69 1.4 17.4Z"
-                fill="white"/>
-          </svg>
-        </MyButton>
+      <div class="sendMsg-wrapper">
+        <div class="sendMsg">
+          <InputText id="inp" class="msgInp" placeholder="Сообщение..." :value="msgText"
+                     @input="msgText = $event.target.value" @click="openPhoneChat"></InputText>
+          <MyButton class="arriveImg" @click="sendMsg()">
+            <svg width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                  d="M1.4 17.4L18.85 9.92C19.66 9.57 19.66 8.43 18.85 8.08L1.4 0.600002C0.74 0.310002 0.00999999 0.800002 0.00999999 1.51L0 6.12C0 6.62 0.37 7.05 0.87 7.11L15 9L0.87 10.88C0.37 10.95 0 11.38 0 11.88L0.00999999 16.49C0.00999999 17.2 0.74 17.69 1.4 17.4Z"
+                  fill="white"/>
+            </svg>
+          </MyButton>
+        </div>
       </div>
       <div class="message" ref="message">
         <ChatMsg v-for="msg in messagesData.slice().reverse()" :key="msg" :msg="msg"></ChatMsg>
@@ -165,12 +167,26 @@ export default {
     display: none;
   }
 
+  .messagesArr {
+    overflow-y: unset;
+  }
+
+  .sendMsg-wrapper {
+    position: relative;
+    height: 70px;
+  }
+
+  .sendMsg {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+  }
+
   .phone {
     display: flex;
     align-self: center;
     width: 85%;
-    height: 100%;
-    max-height: 400px;
+    height: 460px;
     background: rgba(255, 255, 255, 1);
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -10px 20px 0 rgba(44, 57, 121, 0.1);
@@ -179,6 +195,8 @@ export default {
 
   .phone .message {
     display: none;
+    height: 350px;
+    overflow-y: scroll;
   }
 
   .open .message {
