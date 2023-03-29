@@ -1,20 +1,20 @@
 <template>
-  <table class="spread">
-    <slot>
+    <table class="spread">
+        <slot>
 
-    </slot>
-  </table>
+        </slot>
+    </table>
 </template>
 
 <script>
 export default {
-  name: "MySpreadsheet"
+    name: "MySpreadsheet"
 }
 </script>
 
 <style scoped>
 .spread {
-  width: 100%;
-  margin: 0 auto;
+    width: 100%;
+    margin: 0 auto;
 }
 </style>
