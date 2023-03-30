@@ -233,6 +233,10 @@ export default {
         .phone {
             display: flex;
         }
+
+        .timer, .status, .grid {
+            margin-bottom: 3%;
+        }
     }
 }
 </style>

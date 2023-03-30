@@ -167,9 +167,7 @@ tr {
         box-shadow: 0 2px 6px rgba(44, 57, 121, 0.1);
         border-radius: 0 0 16px 16px;
     }
-}
 
-@media screen and (max-width: 770px) {
     .phoneDel {
         display: none;
     }

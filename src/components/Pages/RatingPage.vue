@@ -184,7 +184,7 @@ tr {
     }
 
     th {
-        padding-right: 1em;
+        padding-right: 35px;
     }
 
     .namingPC {
@@ -193,6 +193,12 @@ tr {
 
     .namingPhone {
         display: block;
+    }
+}
+
+@media screen and (max-width: 455px) {
+    th {
+        padding-right: 1em;
     }
 }
 </style>
