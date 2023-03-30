@@ -69,4 +69,16 @@ export default {
         padding: 0.25%;
     }
 }
+
+@media screen and (max-width: 505px) {
+    .time {
+        font-size: 1.4em
+    }
+}
+
+@media screen and (max-width: 505px) and (max-height: 715px) {
+    .time {
+        font-size: 1.1em;
+    }
+}
 </style>

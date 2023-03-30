@@ -221,7 +221,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 455px) {
+@media screen and (max-width: 505px) {
     .phone {
         display: flex;
         align-self: center;

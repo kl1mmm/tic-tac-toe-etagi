@@ -160,6 +160,7 @@ export default {
     top: 30%;
     left: 39%;
     width: 17.5%;
+    z-index: 20;
 }
 
 .usersChat {
@@ -229,12 +230,12 @@ export default {
 }
 
 @media screen and (max-width: 905px) {
-    .screen {
-        flex-direction: column;
-    }
-
     .wrapper {
         height: 100%;
+    }
+
+    .screen {
+        flex-direction: column;
     }
 
     MyNavbar {
@@ -279,6 +280,7 @@ export default {
     }
 
     .playersTable {
+        position: absolute;
         width: 90%;
         z-index: 1;
         align-self: center;
@@ -375,6 +377,7 @@ export default {
         width: 100%;
         height: 100%;
         margin: 1% auto;
+        margin-top: 130px;
     }
 
     .Popup {
@@ -393,7 +396,7 @@ export default {
     }
 }
 
-@media screen and (max-width: 455px) {
+@media screen and (max-width: 505px) {
     .tableName {
         font-size: 1.3em;
     }
@@ -410,8 +413,20 @@ export default {
         width: 100%;
     }
 
+    .Popup {
+        width: 60%;
+        top: 15%;
+        left: 12.5%;
+    }
+
     .open {
         margin-top: 70px;
+    }
+}
+
+@media screen and (max-width: 505px) and (max-height: 715px) {
+    .gameGrid {
+        margin-top: 90px;
     }
 }
 </style>

@@ -224,19 +224,60 @@ export default {
         margin-left: 0.5em;
         margin-right: 0.5em;
     }
+}
 
-    @media screen and (max-width: 905px) {
-        .desktop {
-            display: none;
-        }
+@media screen and (max-width: 905px) {
+    .desktop {
+        display: none;
+    }
 
-        .phone {
-            display: flex;
-        }
+    .phone {
+        display: flex;
+    }
 
-        .timer, .status, .grid {
-            margin-bottom: 3%;
-        }
+    .timer, .status, .grid {
+        margin-bottom: 3%;
+    }
+}
+
+@media screen and (max-width: 505px) {
+    .timer {
+        width: 5em;
+        height: 2.5em;
+    }
+
+    .status {
+        height: 2em;
+    }
+
+    .timer, .status, .grid {
+        margin-bottom: 1.5%;
+    }
+}
+
+@media screen and (max-width: 505px) and (max-height: 715px) {
+    .timer {
+        width: 4em;
+        height: 1.75em;
+    }
+
+    .status {
+        height: 1.5em;
+    }
+
+    .statusText {
+        font-size: 0.7em;
+    }
+
+    .turnImg {
+        height: 1em;
+        width: 1em;
+        margin-left: 0.4em;
+        margin-right: 0.4em;
+    }
+
+    .timer, .status, .grid {
+        margin-bottom: 1.25%;
     }
 }
 </style>

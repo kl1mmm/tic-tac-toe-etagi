@@ -270,4 +270,12 @@ tr {
         align-items: center;
     }
 }
+
+@media screen and (max-width: 505px) {
+    .Popup {
+        top: 12.5%;
+        left: 8.5%;
+        width: 70%;
+    }
+}
 </style>
