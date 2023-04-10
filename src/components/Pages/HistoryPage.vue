@@ -7,7 +7,36 @@
                     История игр
                 </div>
                 <div class="table">
-                    <MySpreadsheet class="spreadSheet">
+                    <MySpreadsheet class="spreadSheet PC">
+                        <thead>
+                        <tr>
+                            <th class="row">Игроки</th>
+                            <th class="row phoneDel"></th>
+                            <th class="row">Дата</th>
+                            <th class="row">Время игры</th>
+                        </tr>
+                        </thead>
+                        <tbody v-for="game in gamesData" :key="game.ID">
+                        <tr>
+                            <td class="row"><img alt="0" class="gameImg"
+                                                 src="@/components/UI/pics/ZeroPlayer1.svg">{{ game.Player1Name }}
+                                <img class="winner" alt="Победитель"
+                                     src="@/components/UI/pics/GameWinner.svg"
+                                     v-if="game.Winner === game.Player1Name">
+                            </td>
+                            <div class="versus row phoneDel">против</div>
+                            <td class="row"><img alt="X" class="gameImg"
+                                                 src="@/components/UI/pics/CrossPlayer2.svg">{{ game.Player2Name }}
+                                <img class="winner" alt="Победитель"
+                                     src="@/components/UI/pics/GameWinner.svg"
+                                     v-if="game.Winner === game.Player2Name">
+                            </td>
+                            <td class="row">{{ game.Date }}</td>
+                            <td class="row">{{ game.Time }}</td>
+                        </tr>
+                        </tbody>
+                    </MySpreadsheet>
+                    <MySpreadsheet class="spreadSheet phone">
                         <thead>
                         <tr>
                             <th class="row">Игроки</th>
@@ -88,6 +117,14 @@ export default {
     align-items: center;
 }
 
+.phone {
+    display: none;
+}
+
+.PC {
+    display: table;
+}
+
 .block {
     background: #ffffff;
     width: 48.5%;
@@ -156,6 +193,14 @@ tr {
 }
 
 @media screen and (max-width: 905px) {
+    .phone {
+        display: table;
+    }
+
+    .PC {
+        display: none;
+    }
+
     .block {
         width: 100%;
         height: 95%;
