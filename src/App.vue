@@ -3,7 +3,18 @@
 </template>
 
 <script>
+import axios from 'axios'
 
+export default {
+    name: 'App',
+    data() {
+    },
+    mounted() {
+        axios.get('http://localhost:8000/api/users/').then((response) => {
+            console.log(response.data)
+        })
+    }
+}
 </script>
 
 <style>
