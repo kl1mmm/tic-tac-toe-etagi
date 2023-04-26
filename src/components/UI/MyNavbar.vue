@@ -63,8 +63,6 @@ import router from "@/components/Router/router";
 export default {
     name: "MyNavbar",
     components: {MyIconButton},
-    data() {
-    },
     methods: {
         logout() {
             this.$store.commit('removeToken')
