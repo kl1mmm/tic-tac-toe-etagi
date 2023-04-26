@@ -7,14 +7,14 @@
             </div>
             <div class="login">
                 <InputText id="login" class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"
-                           v-bind:value="login"
-                           @input="login = $event.target.value" @change="toggleBtn"></InputText>
+                           v-bind:value="username"
+                           @input="username = $event.target.value" @change="toggleBtn"></InputText>
                 <div id="invalidLoginText">Неверный логин</div>
                 <InputText id="passwd" class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"
                            v-bind:value="password"
                            @input="password = $event.target.value" @change="toggleBtn"></InputText>
                 <div id="invalidLoginText">Неверный пароль</div>
-                <MyButton disabled id="subBtn" class="logBtn" @click="isLogin">Войти</MyButton>
+                <MyButton disabled id="subBtn" class="logBtn" @click="newLogin">Войти</MyButton>
             </div>
         </div>
     </div>
@@ -24,38 +24,52 @@
 import InputText from "@/components/UI/InputText";
 import MyButton from "@/components/UI/MyButton";
 import router from "@/components/Router/router";
+import axios from "axios";
 
 export default {
     name: "MyAuth",
     components: {MyButton, InputText},
     data() {
         return {
-            login: '',
+            username: '',
             password: ''
         }
     },
     methods: {
-        isLogin() {
-            if (this.login === 'admin' && this.password === 'admin') {
+        newLogin() {
+            const formData = {
+                username: this.username,
+                password: this.password
+            }
+
+            axios.post('http://127.0.0.1:8000/api/v1/token/login', formData).then(response => {
+                const token = response.data.auth_token
+                this.$store.commit('setToken', token)
+                axios.defaults.headers.common['Authorization'] = "Token " + token
+                localStorage.setItem("token", token)
                 router.push('/sessions/');
-            } else {
-                let lg = document.getElementById('login');
-                let pd = document.getElementById('passwd');
-                lg.value = '';
-                pd.value = '';
-                lg.style.border = '1px solid #E93E3E';
-                pd.style.border = '1px solid #E93E3E';
-                document.getElementById('invalidLoginText').style.display = 'block';
-                document.getElementById('invalidLoginText').style.display = 'block';
-                document.getElementById('subBtn').disabled = true;
-                let elms = document.querySelectorAll("[id='invalidLoginText']");
-                for (let i = 0; i < elms.length; i++) {
-                    elms[i].style.display = 'block';
-                }
+            }).catch(error => {
+                console.log(error)
+                this.clearLoginInfo()
+            })
+        },
+        clearLoginInfo() {
+            let lg = document.getElementById('login');
+            let pd = document.getElementById('passwd');
+            lg.value = '';
+            pd.value = '';
+            lg.style.border = '1px solid #E93E3E';
+            pd.style.border = '1px solid #E93E3E';
+            document.getElementById('invalidLoginText').style.display = 'block';
+            document.getElementById('invalidLoginText').style.display = 'block';
+            document.getElementById('subBtn').disabled = true;
+            let elms = document.querySelectorAll("[id='invalidLoginText']");
+            for (let i = 0; i < elms.length; i++) {
+                elms[i].style.display = 'block';
             }
         },
         toggleBtn() {
-            if (this.login && this.password) {
+            if (this.username && this.password) {
                 document.getElementById('subBtn').disabled = false;
             } else {
                 document.getElementById('subBtn').disabled = true;

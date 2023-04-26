@@ -25,7 +25,7 @@
             <a @click="$router.push('/players-list/')" href="#" class="link">Список игроков</a>
         </div>
         <div class="h-right">
-            <MyIconButton @click="$router.push('/')" class="ExitBtn"></MyIconButton>
+            <MyIconButton @click="logout" class="ExitBtn"></MyIconButton>
         </div>
     </header>
     <nav>
@@ -46,7 +46,7 @@
                     <li><a @click="$router.push('/sessions/')" href="#">Активные игроки</a></li>
                     <li><a @click="$router.push('/history/')" href="#">История игр</a></li>
                     <li><a @click="$router.push('/players-list/')" href="#">Список игроков</a></li>
-                    <li><a class="item-leave" @click="$router.push('/')" href="#">Выйти
+                    <li><a class="item-leave" @click="logout" href="#">Выйти
                         <MyIconButton class="phoneExitBtn"></MyIconButton>
                     </a>
                     </li>
@@ -58,10 +58,20 @@
 
 <script>
 import MyIconButton from "@/components/UI/MyIconButton";
+import router from "@/components/Router/router";
 
 export default {
     name: "MyNavbar",
-    components: {MyIconButton}
+    components: {MyIconButton},
+    data() {
+    },
+    methods: {
+        logout() {
+            this.$store.commit('removeToken')
+            localStorage.removeItem('token')
+            router.push('/');
+        }
+    }
 }
 </script>
 

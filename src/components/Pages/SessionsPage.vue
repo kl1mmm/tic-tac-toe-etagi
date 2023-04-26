@@ -8,12 +8,14 @@
                 </div>
                 <div class="table">
                     <MySpreadsheet>
-                        <tbody class="sessionsList" v-for="player in playersData" :key="player.ID">
+                        <tbody class="sessionsList" v-for="player in playersData" :key="player.id">
                         <tr class="row">
-                            <td class="nameOfPlayers">{{ player.PlayerName }}</td>
+                            <td class="nameOfPlayers">
+                                {{ [player.last_name, player.first_name, player.profile.patronymic_name].join(' ') }}
+                            </td>
                             <td>
-                                <MyStatus class="S" style="padding: 0.25em 0.75em">
-                                    {{ player.Status }}
+                                <MyStatus class="S OutOfGame" style="padding: 0.25em 0.75em">
+                                    Вне игры
                                 </MyStatus>
                             </td>
                             <td>
@@ -34,20 +36,20 @@ import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyButton from "@/components/UI/MyButton";
 import MyStatus from "@/components/UI/MyStatus";
+import axios from "axios";
 
 export default {
     name: "SessionsPage",
     components: {MyStatus, MyButton, MySpreadsheet, MyNavbar},
     data() {
         return {
-            playersData: [{ID: '1', PlayerName: 'Александров Игнат Анатолиевич', Status: 'Свободен'},
-                {ID: '2', PlayerName: 'Василенко Эрик Платонович', Status: 'В игре'},
-                {ID: '3', PlayerName: 'Быков Юрий Виталиевич', Status: 'Свободен'},
-                {ID: '4', PlayerName: 'Галкин Феликс Платонович', Status: 'Вне игры'},
-                {ID: '5', PlayerName: 'Комаров Цефас Александрович', Status: 'Свободен'}]
+            playersData: []
         }
     },
     mounted() {
+        axios.get('http://localhost:8000/api/v1/profiles/').then((response) => {
+            this.playersData = response.data.results;
+        })
         let statuses = document.querySelectorAll('.S')
         statuses.forEach((item) => {
                 if (item.innerText === 'Свободен') {

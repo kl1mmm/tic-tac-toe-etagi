@@ -132,6 +132,8 @@ export default {
                 }).split('г.')[0]
             })
         }
+    },
+    mounted() {
     }
 }
 </script>

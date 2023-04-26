@@ -17,19 +17,26 @@
                             <th class="row">Процент побед</th>
                         </tr>
                         </thead>
-                        <tbody v-for="player in playersData" :key="player.ID">
+                        <tbody v-for="player in playersData" :key="player.id">
                         <tr>
-                            <td class="row namingPC">{{ player.PlayerName }}</td>
-                            <td class="row namingPhone" style="padding-right: 1em;">{{
-                                player.PlayerName.slice(0, player.PlayerName.lastIndexOf(' '))
-                                }}<br>{{
-                                player.PlayerName.slice(player.PlayerName.lastIndexOf(' '), player.PlayerName.length)
+                            <td class="row namingPC">{{
+                                [player.user.last_name, player.user.first_name, player.user.profile.patronymic_name].join(' ')
                                 }}
                             </td>
-                            <td class="row">{{ player.Games }}</td>
-                            <td class="row" style="color: #69B849;">{{ player.Wins }}</td>
-                            <td class="row" style="color: #E93E3E;">{{ player.Loses }}</td>
-                            <td class="row">{{ player.percentOfWins }}</td>
+                            <td class="row namingPhone" style="padding-right: 1em;">{{
+                                [player.user.last_name, player.user.first_name].join(' ')
+                                }}<br>{{
+                                player.user.profile.patronymic_name
+                                }}
+                            </td>
+                            <td class="row">{{ player.count_of_games }}</td>
+                            <td class="row" style="color: #69B849;">{{ player.count_of_wins }}</td>
+                            <td class="row" style="color: #E93E3E;">{{ player.count_of_loses }}</td>
+                            <td class="row">
+                                {{
+                                Math.round(Number(player.count_of_wins) / Number(player.count_of_games)) * 100 + '%'
+                                }}
+                            </td>
                         </tr>
                         </tbody>
                     </MySpreadsheet>
@@ -42,53 +49,20 @@
 <script>
 import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet";
+import axios from "axios";
 
 export default {
     name: "SessionsPage",
     components: {MySpreadsheet, MyNavbar},
     data() {
         return {
-            playersData: [{
-                ID: '1',
-                PlayerName: 'Александров Игнат Анатолиевич',
-                Games: '24534',
-                Wins: '9824',
-                Loses: '1222',
-                percentOfWins: '87%'
-            },
-                {
-                    ID: '2',
-                    PlayerName: 'Шевченко Рафаил Михайлович',
-                    Games: '24534',
-                    Wins: '9824',
-                    Loses: '1222',
-                    percentOfWins: '87%'
-                },
-                {
-                    ID: '3',
-                    PlayerName: 'Мазайло Трофим Артёмович',
-                    Games: '24534',
-                    Wins: '9824',
-                    Loses: '1222',
-                    percentOfWins: '87%'
-                },
-                {
-                    ID: '4',
-                    PlayerName: 'Логинов Остин Данилович',
-                    Games: '24534',
-                    Wins: '9824',
-                    Loses: '1222',
-                    percentOfWins: '87%'
-                },
-                {
-                    ID: '5',
-                    PlayerName: 'Борисов Йошка Васильевич',
-                    Games: '24534',
-                    Wins: '9824',
-                    Loses: '1222',
-                    percentOfWins: '87%'
-                }]
+            playersData: []
         }
+    },
+    mounted() {
+        axios.get('http://localhost:8000/api/v1/rating/').then((response) => {
+            this.playersData = response.data.results;
+        })
     }
 }
 </script>
