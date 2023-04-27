@@ -11,28 +11,44 @@
                         <thead>
                         <tr>
                             <th class="row">Игроки</th>
-                            <th class="row phoneDel"></th>
+                            <th class="row"></th>
+                            <th class="row"></th>
                             <th class="row">Дата</th>
                             <th class="row">Время игры</th>
                         </tr>
                         </thead>
-                        <tbody v-for="game in gamesData" :key="game.ID">
+                        <tbody v-for="game in gamesData" :key="game.id">
                         <tr>
-                            <td class="row"><img alt="0" class="gameImg"
-                                                 src="@/components/UI/pics/ZeroPlayer1.svg">{{ game.Player1Name }}
+                            <td class="row game"><img alt="0" class="gameImg"
+                                                      src="@/components/UI/pics/ZeroPlayer1.svg">{{
+                                [game.p1Info.last_name, game.p1Info.first_name, game.p1Info.profile.patronymic_name].join(' ')
+                                }}
                                 <img class="winner" alt="Победитель"
                                      src="@/components/UI/pics/GameWinner.svg"
-                                     v-if="game.Winner === game.Player1Name">
+                                     v-if="game.winner === 'O'">
                             </td>
                             <div class="versus row phoneDel">против</div>
-                            <td class="row"><img alt="X" class="gameImg"
-                                                 src="@/components/UI/pics/CrossPlayer2.svg">{{ game.Player2Name }}
+                            <td class="row game"><img alt="X" class="gameImg"
+                                                      src="@/components/UI/pics/CrossPlayer2.svg">{{
+                                [game.p2Info.last_name, game.p2Info.first_name, game.p2Info.profile.patronymic_name].join(' ')
+                                }}
                                 <img class="winner" alt="Победитель"
                                      src="@/components/UI/pics/GameWinner.svg"
-                                     v-if="game.Winner === game.Player2Name">
+                                     v-if="game.winner === 'X'">
                             </td>
-                            <td class="row">{{ game.Date }}</td>
-                            <td class="row">{{ game.Time }}</td>
+                            <td class="row">{{
+                                (Intl.DateTimeFormat('ru', {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric"
+                                }).format(new Date(game.date))).split(' г.')[0]
+                                }}
+                            </td>
+                            <td class="row">
+                                {{
+                                (game.game_timing).split(':')[0] + ' мин. ' + (game.game_timing).split(':')[1] + ' сек.'
+                                }}
+                            </td>
                         </tr>
                         </tbody>
                     </MySpreadsheet>
@@ -45,25 +61,39 @@
                             <th class="row">Время игры</th>
                         </tr>
                         </thead>
-                        <tbody v-for="game in gamesData" :key="game.ID">
+                        <tbody v-for="game in gamesData" :key="game.id">
                         <tr>
                             <div class="phoneColumn">
                                 <td class="row"><img alt="0" class="gameImg"
-                                                     src="@/components/UI/pics/ZeroPlayer1.svg">{{ game.Player1Name }}
+                                                     src="@/components/UI/pics/ZeroPlayer1.svg">{{
+                                    [game.p1Info.last_name, (game.p1Info.first_name[0] + '.'), (game.p1Info.profile.patronymic_name[0] + '.')].join(' ')
+                                    }}
                                     <img class="winner" alt="Победитель"
                                          src="@/components/UI/pics/GameWinner.svg"
-                                         v-if="game.Winner === game.Player1Name">
+                                         v-if="game.winner === 'O'">
                                 </td>
                                 <div class="versus row phoneDel">против</div>
                                 <td class="row"><img alt="X" class="gameImg"
-                                                     src="@/components/UI/pics/CrossPlayer2.svg">{{ game.Player2Name }}
+                                                     src="@/components/UI/pics/CrossPlayer2.svg">{{
+                                    [game.p2Info.last_name, (game.p2Info.first_name[0] + '.'), (game.p2Info.profile.patronymic_name[0] + '.')].join(' ')
+                                    }}
                                     <img class="winner" alt="Победитель"
                                          src="@/components/UI/pics/GameWinner.svg"
-                                         v-if="game.Winner === game.Player2Name">
+                                         v-if="game.winner === 'X'">
                                 </td>
                             </div>
-                            <td class="row">{{ game.Date }}</td>
-                            <td class="row">{{ game.Time }}</td>
+                            <td class="row">{{
+                                (Intl.DateTimeFormat('ru', {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric"
+                                }).format(new Date(game.date))).split(' г.')[0]
+                                }}
+                            </td>
+                            <td class="row">{{
+                                (game.game_timing).split(':')[0] + ' мин. ' + (game.game_timing).split(':')[1] + ' сек.'
+                                }}
+                            </td>
                         </tr>
                         </tbody>
                     </MySpreadsheet>
@@ -76,29 +106,21 @@
 <script>
 import MyNavbar from "@/components/UI/MyNavbar";
 import MySpreadsheet from "@/components/UI/MySpreadsheet";
+import axios from "axios";
+import store from "@/store";
 
 export default {
     name: "HistoryPage",
     components: {MySpreadsheet, MyNavbar},
     data() {
         return {
-            gamesData: [{
-                ID: '1',
-                Player1Name: 'Терещенко У. Р.',
-                Player2Name: 'Многогрешный П. В.',
-                Winner: 'Терещенко У. Р.',
-                Date: '12 февраля 2022',
-                Time: '43 мин. 13 сек.'
-            }, {
-                ID: '2',
-                Player1Name: 'Горбачёв А. Д.',
-                Player2Name: 'Многогрешный П. В.',
-                Winner: 'Многогрешный П. В.',
-                Date: '12 февраля 2022',
-                Time: '43 мин. 13 сек.'
-            }
-            ]
+            gamesData: [],
         }
+    },
+    mounted() {
+        axios.get('http://127.0.0.1:8000/api/v1/lastgames/', {headers: {"Authorization": 'Token ' + store.getters.auth.token}}).then((response) => {
+            this.gamesData = response.data.results;
+        })
     }
 }
 </script>
@@ -160,20 +182,23 @@ tr {
     box-shadow: inset 0 -1px 0 #EEEFF5;
 }
 
+
 .gameImg {
     width: 1em;
     height: 1em;
     margin-right: 3%;
+    vertical-align: sub;
 }
 
 .versus {
-    margin-top: 17%;
+    margin-top: 21%;
     text-shadow: 0 0 1px black;
 }
 
 .winner {
     width: 1.25em;
     height: 1.25em;
+    vertical-align: text-bottom;
 }
 
 @media screen and (max-width: 1600px) {

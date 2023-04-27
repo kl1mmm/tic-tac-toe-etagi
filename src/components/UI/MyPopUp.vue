@@ -38,6 +38,15 @@ import MyButton from "@/components/UI/MyButton.vue";
 export default {
     name: "MyPopUp",
     components: {MyButton, InputText},
+    data() {
+        return {
+            first_name: '',
+            last_name: '',
+            patronymic_name: '',
+            sex: '',
+            birth_date: ''
+        }
+    },
     methods: {
         closePopup() {
             this.$emit('closePopup');
@@ -55,6 +64,12 @@ export default {
     background: #FFFFFF;
     box-shadow: 3px 6px 24px rgba(44, 57, 121, 0.09);
     border-radius: 1em;
+    transform: translateX(calc(300%));
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+}
+
+.v-popup.active {
+    transform: translateX(0%);
 }
 
 .nameTag {

@@ -37,6 +37,7 @@ import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyButton from "@/components/UI/MyButton";
 import MyStatus from "@/components/UI/MyStatus";
 import axios from "axios";
+import store from "@/store";
 
 export default {
     name: "SessionsPage",
@@ -47,9 +48,10 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://localhost:8000/api/v1/profiles/').then((response) => {
-            this.playersData = response.data.results;
-        })
+        axios.get('http://localhost:8000/api/v1/profiles/', {headers: {"Authorization": 'Token ' + store.getters.auth.token}})
+            .then((response) => {
+                this.playersData = response.data.results;
+            })
         let statuses = document.querySelectorAll('.S')
         statuses.forEach((item) => {
                 if (item.innerText === 'Свободен') {
