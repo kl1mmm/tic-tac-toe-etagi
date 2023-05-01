@@ -2,8 +2,8 @@
     <div class="wrapper">
         <MyNavbar style="width: 100%;"></MyNavbar>
         <div class="screen">
-            <MyPopUp @addNewPlayer="addNewPlayerInConsole" class="Popup" @closePopup="closePopupInfo"
-                     v-if="isPopupVisible"></MyPopUp>
+            <MyToast ref="toast">Изменения внесены</MyToast>
+            <MyPopUp @addNewPlayer="addNewPlayer" class="Popup" @closePopup="closePopupInfo"></MyPopUp>
             <div class="block">
                 <div class="top-of-table">
                     <div class="table-naming">
@@ -27,31 +27,54 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="player in playersData" :key="player.ID">
-                            <td class="row">{{ player.PlayerName }}</td>
-                            <td class="row">{{ player.Age }}</td>
-                            <td class="row"><img alt="Мужской" class="sex" src="@/components/UI/pics/MaleSex.svg"
-                                                 v-if="player.Sex === 'Мужской'">
-                                <img alt="Женский" class="sex" src="@/components/UI/pics/FemaleSex.svg"
-                                     v-if="player.Sex === 'Женский'">
+                        <tr v-for="player in playersData" :key="player.id">
+                            <td class="row">
+                                {{ [player.last_name, player.first_name, player.profile.patronymic_name].join(' ') }}
                             </td>
                             <td class="row">
-                                <MyStatus class="M"
-                                          :class="{'Free': player.Status==='Активен', 'Blocked': player.Status ==='Заблокирован'}"
-                                          style="width: 90%; padding: 0.15em 0.2em; margin-right: 2em; text-align: center">
-                                    {{ player.Status }}
+                                {{
+                                Math.abs(Math.round((((new Date() - new Date(player.profile.birth_date)) / 1000) / (60 * 60 * 24)) / 365.25))
+                                }}
+                            </td>
+                            <td class="row">
+                                <img alt="Мужской" class="sex" src="@/components/UI/pics/MaleSex.svg"
+                                     v-if="player.profile.sex === 'М'">
+                                <img alt="Женский" class="sex" src="@/components/UI/pics/FemaleSex.svg"
+                                     v-if="player.profile.sex === 'Ж'">
+                            </td>
+                            <td class="row">
+                                <MyStatus class="M Free" v-if="player.is_active"
+                                          style="width: 75%; padding: 0.15em 0.2em; margin-right: 2em; text-align: center">
+                                    Активен
+                                </MyStatus>
+                                <MyStatus class="M Blocked" v-if="!player.is_active"
+                                          style="width: 75%; padding: 0.15em 0.2em; margin-right: 2em; text-align: center">
+                                    Заблокирован
                                 </MyStatus>
                             </td>
-                            <td class="row">{{ player.DateOfCreate }}</td>
-                            <td class="row">{{ player.DateOfEdit }}</td>
+                            <td class="row">{{
+                                (Intl.DateTimeFormat('ru', {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric"
+                                }).format(new Date(player.date_joined))).split(' г.')[0]
+                                }}
+                            </td>
+                            <td class="row">{{
+                                (Intl.DateTimeFormat('ru', {
+                                  year: "numeric",
+                                  month: "long",
+                                  day: "numeric"
+                                }).format(new Date(player.profile.edited_date))).split(' г.')[0]
+                                }}
+                            </td>
                             <td class="row">
-                                <MyButton class="Secondary MSmall btnBlock" v-if="player.Status === 'Активен'"
-                                          @click="player.Status = 'Заблокирован'">
-                                    <img alt="Ø" class="blockImg" src="@/components/UI/pics/Stop.svg"> Заблокировать
+                                <MyButton class="Secondary MSmall btnBlock" v-if="player.is_active"
+                                          @click="blockTheUser(player.id, player)">
+                                    <img alt="Ø" class="blockImg" src="@/components/UI/pics/Stop.svg">Заблокировать
                                 </MyButton>
-                                <MyButton class="Secondary MSmall btnBlock" v-if="player.Status === 'Заблокирован'"
-                                          @click="player.Status = 'Активен'">
-                                    Разблокировать
+                                <MyButton class="Secondary MSmall btnBlock" v-if="!player.is_active"
+                                          @click="unblockTheUser(player.id, player)">Разблокировать
                                 </MyButton>
                             </td>
                         </tr>
@@ -69,71 +92,116 @@ import MySpreadsheet from "@/components/UI/MySpreadsheet";
 import MyStatus from "@/components/UI/MyStatus";
 import MyButton from "@/components/UI/MyButton.vue";
 import MyPopUp from "@/components/UI/MyPopUp.vue";
+import axios from "axios";
+import store from "@/store";
+import MyToast from "@/components/UI/MyToast.vue";
+import moment from "moment";
 
 export default {
     name: "SessionsPage",
-    components: {MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
+    components: {MyToast, MyButton, MyStatus, MySpreadsheet, MyNavbar, MyPopUp},
     data() {
         return {
-            isPopupVisible: false,
-            playersData: [
-                {
-                    ID: 1,
-                    PlayerName: 'Александров Игнат Анатолиевич',
-                    Age: '24',
-                    Sex: 'Женский',
-                    Status: 'Заблокирован',
-                    DateOfCreate: '12 октября 2021',
-                    DateOfEdit: '22 октября 2021'
-                },
-                {
-                    ID: 2,
-                    PlayerName: 'Мартынов Остап Фёдорович',
-                    Age: '12',
-                    Sex: 'Женский',
-                    Status: 'Активен',
-                    DateOfCreate: '12 октября 2021',
-                    DateOfEdit: '22 октября 2021'
-                },
-                {
-                    ID: 3,
-                    PlayerName: 'Комаров Цефас Александрович',
-                    Age: '83',
-                    Sex: 'Мужской',
-                    Status: 'Активен',
-                    DateOfCreate: '12 октября 2021',
-                    DateOfEdit: '22 октября 2021'
-                }]
+            userID: '',
+            playersData: []
         }
     },
     methods: {
         showPopupInfo() {
-            this.isPopupVisible = true;
+            document.querySelector(".Popup").classList.add("active");
         },
         closePopupInfo() {
-            this.isPopupVisible = false;
+            document.querySelector(".Popup").classList.remove("active");
         },
-        addNewPlayerInConsole(userName, userAge, userSex) {
-            this.playersData.push({
-                ID: this.playersData.length + 1, // Нужно учесть, что нет проверки на пустоту списка!
-                PlayerName: userName,
-                Age: userAge,
-                Sex: userSex,
-                Status: 'Активен',
-                DateOfCreate: new Date().toLocaleDateString('RU', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                }).split('г.')[0],
-                DateOfEdit: new Date().toLocaleDateString('RU', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                }).split('г.')[0]
-            })
+        blockTheUser(id, player) {
+            axios
+                .patch('http://127.0.0.1:8000/api/v1/profile/' + id + '/', {
+                        'is_active': false,
+                        'profile':
+                            {
+                                'edited_date': moment().format()
+                            }
+                    },
+                    {headers: {"Authorization": 'Token ' + store.getters.auth.token}})
+                .then((response) => {
+                    this.playersData[this.playersData.indexOf(player)] = response.data
+                    this.$refs.toast.activateSuccess('Пользователь заблокирован')
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.$refs.toast.activateFailed('Недостаточно прав')
+                });
+
+        },
+        unblockTheUser(id, player) {
+            axios
+                .patch('http://127.0.0.1:8000/api/v1/profile/' + id + '/',
+                    {
+                        'is_active': true,
+                        'profile':
+                            {
+                                'edited_date': moment().format(),
+                            }
+                    },
+                    {headers: {"Authorization": 'Token ' + store.getters.auth.token}})
+                .then((response) => {
+                    this.playersData[this.playersData.indexOf(player)] = response.data
+                    this.$refs.toast.activateSuccess('Пользователь разблокирован')
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.$refs.toast.activateFailed(error.response.data.detail)
+                });
+        },
+        addNewPlayer(username, first_name, last_name, email, password, patronymic_name, birth_date, sex) {
+            axios
+                .post('http://127.0.0.1:8000/api/v1/create_user/',
+                    {
+                        'username': username,
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'email': email,
+                        'password': password,
+                        'date_joined': moment().format(),
+                        'is_active': true,
+                        'profile': {
+                            'patronymic_name': patronymic_name,
+                            'sex': sex,
+                            'edited_date': moment().format(),
+                            'birth_date': moment(birth_date).format(),
+                        }
+                    },
+                    {headers: {"Authorization": 'Token ' + store.getters.auth.token}})
+                .then((response) => {
+                    console.log(response)
+                    this.$refs.toast.activateSuccess('Учётная запись создана')
+                    this.playersData.push({
+                        'username': username,
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'email': email,
+                        'password': password,
+                        'date_joined': moment().format(),
+                        'is_active': true,
+                        'profile': {
+                            'patronymic_name': patronymic_name,
+                            'sex': sex,
+                            'edited_date': moment().format(),
+                            'birth_date': moment(birth_date).format(),
+                        }
+                    })
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.$refs.toast.activateFailed(error.response.data.detail)
+                })
         }
     },
     mounted() {
+        axios.get('http://127.0.0.1:8000/api/v1/profiles/', {headers: {"Authorization": 'Token ' + store.getters.auth.token}})
+            .then((response) => {
+                this.playersData = response.data.results;
+            })
     }
 }
 </script>
@@ -143,7 +211,7 @@ export default {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .screen {
@@ -206,6 +274,7 @@ tr {
     top: 35%;
     left: 37.5%;
     width: 20%;
+
 }
 
 @media screen and (max-width: 1600px) {

@@ -8,11 +8,11 @@
             <div class="login">
                 <InputText id="login" class="inp" type="text" placeholder="Логин" style="margin-top: 1.25em;"
                            v-bind:value="username"
-                           @input="username = $event.target.value" @change="toggleBtn"></InputText>
+                           @change="username = $event.target.value" @input="toggleBtn"></InputText>
                 <div id="invalidLoginText">Неверный логин</div>
                 <InputText id="passwd" class="inp" type="password" placeholder="Пароль" style="margin-top: 0.75em"
                            v-bind:value="password"
-                           @input="password = $event.target.value" @change="toggleBtn"></InputText>
+                           @change="password = $event.target.value" @input="toggleBtn"></InputText>
                 <div id="invalidLoginText">Неверный пароль</div>
                 <MyButton disabled id="subBtn" class="logBtn" @click="newLogin">Войти</MyButton>
             </div>
@@ -69,11 +69,7 @@ export default {
             }
         },
         toggleBtn() {
-            if (this.username && this.password) {
-                document.getElementById('subBtn').disabled = false;
-            } else {
-                document.getElementById('subBtn').disabled = true;
-            }
+            document.getElementById('subBtn').disabled = (document.getElementById('login').value && document.getElementById('passwd').value) === '';
         }
     }
 }

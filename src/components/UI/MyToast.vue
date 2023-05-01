@@ -6,7 +6,7 @@
 
                 <div class="message">
                     <span class="text text-1">Успешно!</span>
-                    <span class="text text-2"><slot></slot></span>
+                    <span id="succTextMsg" class="text text-2"><slot></slot></span>
                 </div>
             </div>
             <i class="close" @click="closeToastSuccess()"><img alt="☓" src="@/components/UI/pics/xmark-solid.svg"></i>
@@ -20,7 +20,7 @@
 
                 <div class="message">
                     <span class="text text-1">Ошибка!</span>
-                    <span class="text text-2">Недостаточно прав доступа</span>
+                    <span id="failTextMsg" class="text text-2"><slot></slot></span>
                 </div>
             </div>
             <i class="close" @click="closeToastFailed()"><img alt="☓" src="@/components/UI/pics/xmark-solid.svg"></i>
@@ -35,10 +35,12 @@ export default {
     data() {
     },
     methods: {
-        activateSuccess() {
+        activateSuccess(text) {
             let timer1, timer2;
             document.querySelector(".success .toast").classList.add("active");
+            document.getElementById('succTextMsg').innerHTML = text;
             document.querySelector(".success .progress").classList.add("active");
+
 
             timer1 = setTimeout(() => {
                 this.closeToastSuccess(timer1, timer2)
@@ -56,9 +58,10 @@ export default {
             clearTimeout(timer1);
             clearTimeout(timer2);
         },
-        activateFailed() {
+        activateFailed(text) {
             let timer1, timer2;
             document.querySelector(".failed .toast").classList.add("active");
+            document.getElementById('failTextMsg').innerHTML = text;
             document.querySelector(".failed .progress").classList.add("active");
 
             timer1 = setTimeout(() => {
