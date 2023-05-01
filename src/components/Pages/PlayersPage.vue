@@ -301,7 +301,7 @@ tr {
     .Popup {
         top: 25%;
         left: 32.5%;
-        width: 30%;
+        width: 40%;
     }
 }
 

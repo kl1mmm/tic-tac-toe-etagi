@@ -181,6 +181,8 @@ export default {
             btnAdd.disabled = (userLogin.value && userEmail.value && userPass.value) === '';
         },
         closePopup() {
+            document.querySelector('.firstStep').style.display = 'block';
+            document.querySelector('.secondStep').style.display = 'none';
             this.$emit('closePopup');
         },
     },
@@ -304,5 +306,26 @@ span {
 
 .password .inp {
     width: 100%;
+}
+
+@media screen and (max-width: 905px) {
+    .lowBlock {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .firstStep .sex {
+        margin-right: 0;
+    }
+
+    .firstStep .sex .text {
+        margin-left: 0;
+    }
+
+    .sex .text {
+        text-align: center;
+        margin: 3% 0;
+    }
 }
 </style>
